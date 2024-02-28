@@ -1,0 +1,202 @@
+/* Fonts styling */
+.w3-allerta {
+    font-family: "Allerta Stencil", Sans-serif, serif;
+}
+
+.raleway {
+    font-family: 'Raleway', sans-serif;
+}
+
+/* COLOURS:
+DARK GREY: #1E2328
+MID GREY: #2A2E34
+LIGHT GREY: #3B3F46
+YELLOW: #FFBF00
+MID YELLOW:#F5B301
+LIGHT YELLOW: #FED053
+*/
+
+/* Headers styling */
+h1 {
+    background-color: #1E2328;
+    color: white;
+    margin: 0px;
+    padding: 16px;
+    text-align: center;
+}
+
+h3 {
+    background-color: #1E2328;
+    color: white;
+    margin: 16px;
+    padding: 16px;
+    text-align: center;
+}
+
+h4 {
+    background-color: #1E2328;
+    color: white;
+    margin: 8px;
+    padding: 8px;
+    text-align: center;
+}
+
+/* Form styling */
+.form {
+    background-color: white;
+    opacity: 80%;
+    margin-bottom: 100px;
+    padding: 16px;
+    position: relative;
+}
+
+.label{
+    color: #1E2328;
+    font-weight: bold;
+    text-align: left;
+}
+
+.label-white{
+    color: white;
+    font-weight: bold;
+    text-align: left;
+}
+
+.input{
+    width: 30%;
+    background-color: transparent;
+}
+
+.inputSubmit {
+    padding: 20px 40px;
+    border: none;
+    border-radius: 8px;
+    margin-right: 16px;
+    cursor: pointer;
+    margin: 32px;
+    background-color: #FED053;
+    width: 130px;
+}
+
+input[type="submit"]:hover {
+    color: white;
+    background-color: #3B3F46;
+}
+
+.inputText {
+    border: 1px solid;
+    padding: 8px;
+    margin: 8px 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.button {
+    padding: 20px 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+}
+
+button:hover{
+    color: white;
+    background-color: #2C3E50;
+}
+
+/* Other styling */
+body {
+    padding-bottom: 100px;
+    position: relative;
+    min-height: 100vh;
+}
+
+.login-container {
+    display: flex;
+}
+
+
+.card {
+    border-color: #2C3E50;
+    margin-right: 10px;
+}
+
+/* Info */
+.info {
+    position: fixed;
+    bottom: 60px;
+    width: 100%;
+    padding: 10px;
+    background-color: #1E2328;
+    color: white;
+    ext-align: center;
+}
+
+/* Footer */
+footer {
+    position: auto;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: #1E2328;
+    color: white;
+    ext-align: center;
+    text-align: center;
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+}
+
+.icon-container:hover {
+    background-color: #FFBF00;
+}
+
+/* Footer Opening Hours Styling */
+.opening-hours {
+    display: flex;
+}
+
+.weekdays {
+    flex: 1;
+    text-align: left;
+}
+
+.times {
+    flex: 1;
+    text-align: right;
+}
+
+/* Contact icons styling */
+.contact-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 5px;
+    vertical-align: middle;
+    border-radius: 50%;
+    background-color: #FFBF00;
+}
+
+/* Contact information styling */
+.contact-info p {
+    margin-bottom: 5px;
+}
+
+/* Active Members styling */
+.active-members {
+    display: flex;
+    align-items: center;
+}
+
+/* Back Button */
+.backButton {
+    padding: 20px 40px;
+    margin: 32px 100px 100px 32px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #FED053;
+    text-align: center;
+    width: 130px;
+}

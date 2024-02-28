@@ -2,10 +2,116 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title = "Hello!"</title>
-    <link href="{{ url_for('.static', filename='css/style.css') }}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <title>Login - Gym Booking App</title>
+
+    <!-- Add background image -->
+    <style>
+        .background{
+            background-image: url("../static/images/background/login.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            align-items: center;
+            height: 90vh;
+            margin: 0;
+        }
+    </style>
 </head>
-<body>
+
+<body class="background">
+<h1 class="w3-allerta">Gym Booking Application</h1>
+
+<!--
+UNCOMMEND IF WE WANT TO INTRODUCE FLASH MESSAGES.
+PROBABLY USING ALERTS WOULD BE BETTER
+{%- for message in get_flashed_messages(with_categories = true) %}
+<div class="alert alert-danger">
+    {{ message }}
+</div>
+{%- endfor %}
+-->
+<div class="login-container">
+    <div class="w3-half w3-card w3-margin card">
+        <h3>Log In</h3>
+        <form method="post" action="{{ url_for('login') }}" class="w3-margin">
+            <label class="label-white">Email: </label>
+            <input type="text" name="user_email" class="inputText"/>
+            <br>
+            <label class="label-white">Password</label>
+            <input type="password" name="password" class="inputText"/>
+            <br>
+            <input type="submit" name="Login" value="Login" class="w3-right inputSubmit"/>
+        </form>
+    </div>
+
+    <div class="w3-half w3-card w3-margin card">
+        <h3>Not a Member Yet?</h3>
+        <form method="get" action="{{ url_for('register') }}" class="w3-margin">
+            <input type="submit" name="Register" value="Register" class="w3-right inputSubmit"/>
+        </form>
+    </div>
+</div>
+
+<div class="w3-row info">
+    <div class="w3-container w3-third">
+        <h4>Gym Booking App</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+        <!-- Instagram -->
+        <a href="https://www.instagram.com" target="_blank" class="icon-container">
+            <img class="icon" loading="lazy" src="../static/images/icons/instagram.png" alt="Instagram">
+        </a>
+
+        <!-- Facebook -->
+        <a href="https://www.facebook.com" target="_blank" class="icon-container">
+            <img class="icon" loading="lazy" src="../static/images/icons/facebook.png" alt="Facebook">
+        </a>
+
+        <!-- Twitter -->
+        <a href="https://www.twitter.com" target="_blank" class="icon-container">
+            <img class="icon" loading="lazy" src="../static/images/icons/twitter.png" alt="Twitter">
+        </a>
+    </div>
+
+    <div class="w3-container w3-third">
+        <h4>Opening Hours</h4>
+        <div class="w3-center">
+            <div class="opening-hours">
+                <span class="weekdays">
+                    <p>Monday-Friday</p>
+                    <p>Saturday</p>
+                    <p>Sunday</p>
+                    <p>Bank Holidays</p>
+                </span>
+                <span class="times">
+                    <p>9:00 AM - 10:00 PM</p>
+                    <p>09:00 AM - 6:00 PM</p>
+                    <p>CLOSED</p>
+                    <p>11:00 AM - 07:00 PM</p>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-container w3-third">
+        <h4>Contact Us</h4>
+        <div>
+            <p><img class="contact-icon" src="../static/images/icons/phone.png" alt="Phone"> +123456789</p>
+            <p><img class="contact-icon" src="../static/images/icons/email.png" alt="Email"> gymapp@gymapp.com</p>
+            <p><img class="contact-icon" src="../static/images/icons/location2.png" alt="Location"> 123 Street, City</p>
+        </div>
+    </div>
+</div>
+
+<footer class="w3-bottom">
+    <p>© 2024 INFUSE PROJECT. All rights reserved.</p>
+</footer>
 
 </body>
 </html>
