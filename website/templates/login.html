@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Login - Gym Booking App</title>
 
     <!-- Add background image -->
@@ -58,6 +60,7 @@ PROBABLY USING ALERTS WOULD BE BETTER
     </div>
 </div>
 
+<!-- FIX ICONS HIGHLIGHTING AT SOME STAGE -->
 <div class="w3-row info">
     <div class="w3-container w3-third">
         <h4>Gym Booking App</h4>
@@ -112,6 +115,19 @@ PROBABLY USING ALERTS WOULD BE BETTER
 <footer class="w3-bottom">
     <p>© 2024 INFUSE PROJECT. All rights reserved.</p>
 </footer>
+
+<!-- display alert if login was unsuccessful -->
+{% if alert %}
+<script>
+    // User exists error
+    {% if alert_type == 'info' %}
+    alert("{{ alert }}");
+    // Authentication error
+    {% elif alert_type == 'error' %}
+    alert("{{ alert }}");
+    {% endif %}
+</script>
+{% endif %}
 
 </body>
 </html>
