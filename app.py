@@ -14,6 +14,7 @@ app.static_folder = 'static'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + USERNAME + ':' + PASSWORD + '@' + HOST + '/' + DB_NAME
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///gym.sqlite3'
+app.config['SECRET_KEY'] = 'root'
 db = SQLAlchemy(app)
 
 
@@ -22,7 +23,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(120), nullable=False)
     last_name = db.Column(db.String(120), nullable=False)
-    user_email = db.Column(db.String(120), nullable=False)
+    user_email = db.Column(db.String(120), unique=True, nullable=False)
     user_password = db.Column(db.String(120), nullable=False)
     role = db.Column(db.String(120), nullable=False)
 
@@ -43,9 +44,8 @@ def create_tables():
 
 
 def add_initial_data():
-    # Create initial users and dogs
+    # Create initial users if one already doesn't exist
     if db.session.query(User).count() == 0:
-        # Create initial users and dogs
         user1 = User(first_name='user1', last_name="user1", user_email='user1@gmail.com', user_password='user1',
                      role="user")
         user2 = User(first_name='user2', last_name="user2", user_email='user2@gmail.com', user_password='user2',
@@ -100,17 +100,17 @@ def register():
 
     if request.method == 'POST':
         # Validate required fields are filled
-        required_fields = ['user', 'user_email', 'user_password']
+        required_fields = ['first_name', 'last_name', 'user_email', 'user_password']
         for field in required_fields:
             if not request.form.get(field):
-                flash(f'Flash register() error\nPlease enter {field}', 'error')
-                return redirect(url_for('register'))
+                alert_message = 'Please fill in all fields.'
+                return render_template('register.html', alert=alert_message, alert_type='error')
 
         # Check if the email already exists
         user_exists = db.session.query(User).filter_by(user_email=request.form['user_email']).first()
         if user_exists:
             alert_message = 'User with email "{0}" already exists. Please log in.'.format(user_exists)
-            return render_template_string('login.html', alert=alert_message, alert_type='info')
+            return render_template('login.html', alert=alert_message, alert_type='info')
 
         # Create a new user
         new_user = User(
@@ -118,15 +118,20 @@ def register():
             last_name=request.form['last_name'],
             user_email=request.form['user_email'],
             user_password=request.form['user_password'],
-            role = request.form['role']
+            role=request.form['role']
         )
         # Add new user to the db
         db.session.add(new_user)
         db.session.commit()
+        # Redirect to login page with success message
+        return redirect(url_for('login', success_message='Registration successful. Please log in.'))
+    return render_template('register.html', users_count=users_count_value)
 
-        flash('Registration successful. Please log in.', 'success')
-        return redirect(url_for('login', success_message='200'))
-    return render_template('register.html', users_count=users_count_value, dogs_count=dogs_count_value)
+
+@app.route('/index')
+def index():
+    # You can render an HTML template for the index page
+    return render_template('index.html')
 
 
 if __name__ == '__main__':

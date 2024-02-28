@@ -24,6 +24,12 @@
             margin: 0;
         }
     </style>
+
+    <script>
+    {% if success_message %}
+        alert("{{ success_message }}");
+    {% endif %}
+</script>
 </head>
 
 <body class="background">
@@ -46,7 +52,7 @@ PROBABLY USING ALERTS WOULD BE BETTER
             <input type="text" name="user_email" class="inputText"/>
             <br>
             <label class="label-white">Password</label>
-            <input type="password" name="password" class="inputText"/>
+            <input type="password" name="user_password" class="inputText"/>
             <br>
             <input type="submit" name="Login" value="Login" class="w3-right inputSubmit"/>
         </form>
@@ -116,7 +122,7 @@ PROBABLY USING ALERTS WOULD BE BETTER
     <p>© 2024 INFUSE PROJECT. All rights reserved.</p>
 </footer>
 
-<!-- display alert if login was unsuccessful -->
+<!-- display alerts -->
 {% if alert %}
 <script>
     // User exists error

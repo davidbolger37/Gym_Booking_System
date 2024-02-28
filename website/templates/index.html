@@ -4,8 +4,18 @@
     <meta charset="UTF-8">
     <title>Title = "Home"</title>
     <link href="{{ url_for('.static', filename='css/style.css') }}" rel="stylesheet">
+
+    {% if success_message %}
+    <script>
+        window.onload = function() {
+            alert("{{ success_message }}");
+        };
+    </script>
+{% endif %}
 </head>
 <body>
+    <h1>Hello World</h1>
+
 
 </body>
 </html>
