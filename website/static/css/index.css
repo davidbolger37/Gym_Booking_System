@@ -142,7 +142,7 @@ color: yellow;
   padding-top: 102px;
 }
 
-/*SlideShow Style*/
+/*SlideShow Section*/
 
 /* Slideshow container */
 .slideshow-container {
@@ -261,6 +261,73 @@ color: yellow;
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+}
+
+/*About Us Section*/
+
+.about{
+  background-color:black;
+  color:white;
+  width:100%;
+  height:600px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px;
+}
+
+.about .content {
+  max-width: 50%;
+  font-family: Arial
+}
+
+.image-container {
+  position: relative;
+  max-width: 50%;
+}
+
+.image-container::before,
+.image-container::after {
+  content: '';
+  position: absolute;
+  border: 10px solid yellow; /* the color of the border */
+  border-radius: 5px; /* rounded corners */
+}
+
+.image-container::before {
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+}
+
+.image-container::after {
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+}
+
+.image-container img {
+  width: 100%;
+  display: block; /* remove bottom space */
+  height: auto;
+}
+
+.contact-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: yellow; /* the color of your button */
+  color: black; /* text color */
+  text-decoration: none; /* remove underline from link */
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+}
+
+.contact-btn:hover {
+  background-color: white; /* darker shade of orange for hover effect */
 }
 
 
