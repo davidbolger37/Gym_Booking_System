@@ -556,24 +556,24 @@ background-color:yellow;
 }
 
 
+/*Responsive*/
+@media(max-width: 767px){
+  .footer-col{
+    width: 50%;
+    margin-bottom: 30px;
+}
 
-
-
+}
+@media(max-width: 574px){
+  .footer-col{
+    width: 100%;
+}
+}
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
-}
-/* Responsive Menu Toggle */
-.bar {
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px auto;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out;
-    background-color: #fff;
 }
 
 /* For Mobile Screens */
@@ -592,4 +592,34 @@ background-color:yellow;
         display: flex;
     }
 
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .about-section {
+    flex-direction: column;
+  }
+
+  .content,
+  .image-container {
+    max-width: 100%;
+  }
+
+  .image-container::before,
+  .image-container::after {
+    display: none; /* Hide the borders on smaller screens */
+  }
+}
+
+
+/* Responsive adjustments */
+@media screen and (max-width: 650px) {
+  .ourTeam .column {
+    width: 100%; /* Full width on smaller screens */
+    margin-bottom: 16px; /* Add some space between cards */
+  }
+
+  .ourTeam .card img {
+    height: auto; /* Adjust height to be auto on smaller screens */
+  }
 }
