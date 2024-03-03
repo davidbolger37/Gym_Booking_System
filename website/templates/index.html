@@ -2,19 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title = "Home"</title>
-    <link href="{{ url_for('.static', filename='css/style.css') }}" rel="stylesheet">
+    <title>Welcome to GETFIT!</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css">
+    <script src="..\static\js\index.js"></script>
+    <script src="https://kit.fontawesome.com/dc868a21c4.js" crossorigin="anonymous"></script>
+    <!--Get your code at fontawesome.com-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
 
-    {% if success_message %}
-    <script>
-        window.onload = function() {
-            alert("{{ success_message }}");
-        };
-    </script>
-{% endif %}
+<!--    {% if success_message %}-->
+<!--    <script>-->
+<!--        window.onload = function() {-->
+<!--            alert("{{ success_message }}");-->
+<!--        };-->
+<!--    </script>-->
+<!--{% endif %}-->
 </head>
 <body>
-    <h1>Hello World</h1>
+
+<!-- Header -->
+<header id="myHeader">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <!-- Toggle Collapsed Sidepanel -->
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            <a class="active" href="#">HOME</a>
+            <a href="/about">ABOUT US</a>
+            <a href="/booking">BOOKING</a>
+            <a href="/team">TEAM</a>
+            <a href="/login">LOGIN</a>
+            <a href="/register">REGISTER</a>
+            <a href="/contact">CONTACT US</a>
+            <br>
+            <div class="sidebarText">
+                <h2> Working hours </h2>
+                <br>
+                <p> Monday – Friday:
+                    <br> 07:00 – 21:00</p>
+                <br>
+                <p>Saturday:
+                    <br>07:00 – 16:00</p>
+                <br>
+                <p>Sunday Closed</p>
+            </div>
+        </div>
+        <button class="openbtn" onclick="openNav()">☰</button>
+        <!-- Brand Name & Logo -->
+        <i class="fa fa-dumbbell" style="font-size:40px;color:yellow;padding-left:10px"></i>
+        <div class="navbar-brand"><b style="color:yellow;">GET</b>FIT</div>
+        <!-- Navbar items -->
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="active" href="#">HOME</a></li>
+            <li class="nav-item"><a href="/about">ABOUT US</a></li>
+            <li class="nav-item"><a href="/booking">BOOKING</a></li>
+            <li class="nav-item"><a href="/team">TEAM</a></li>
+            <li class="nav-item"><a href="/login">LOGIN</a></li>
+            <li class="nav-item"><a href="/register">REGISTER</a></li>
+            <li class="nav-item"><a href="/contact" class="contact">CONTACT US</a></li>
+        </ul>
+    </nav>
+</header>
 
 
 </body>
