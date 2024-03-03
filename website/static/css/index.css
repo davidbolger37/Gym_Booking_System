@@ -330,6 +330,91 @@ color: yellow;
   background-color: white; /* darker shade of orange for hover effect */
 }
 
+/*Our Team Section*/
+
+.ourTeam {
+  background-color: #212225;
+  width: 100%;
+  height:600px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  padding-top: 50px;
+}
+
+.ourTeam .column {
+  width: 25%;
+  height:500px;
+  padding: 0 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ourTeam .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  background-color:#1d1e20;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.ourTeam .card:hover{
+background-color:yellow;
+}
+
+.ourTeam .card:hover h2,
+.ourTeam .card:hover .title,
+.ourTeam .card:hover p
+{
+  color: black;
+}
+
+
+.ourTeam img {
+  width: 100%;
+  display: block;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+}
+
+
+.ourTeam .card img {
+  height: 300px;
+}
+
+.ourTeam .container {
+  padding: 0 16px;
+  text-align:center;
+  color:white;
+}
+
+.ourTeam .title {
+  color: grey;
+}
+
+.ourTeam .button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  font-size:18px;
+  background-color: grey;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  margin-top:20px;
+  margin-bottom:20px;
+}
+
+.ourTeam .button:hover {
+  background-color: black;
+  color:yellow;
+}
+
 
 
 
