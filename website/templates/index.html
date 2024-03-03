@@ -9,13 +9,13 @@
     <!--Get your code at fontawesome.com-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
 
-<!--    {% if success_message %}-->
-<!--    <script>-->
-<!--        window.onload = function() {-->
-<!--            alert("{{ success_message }}");-->
-<!--        };-->
-<!--    </script>-->
-<!--{% endif %}-->
+    <!--    {% if success_message %}-->
+    <!--    <script>-->
+    <!--        window.onload = function() {-->
+    <!--            alert("{{ success_message }}");-->
+    <!--        };-->
+    <!--    </script>-->
+    <!--{% endif %}-->
 </head>
 <body>
 
@@ -127,7 +127,7 @@
         <span class="dot" onclick="currentSlide(3)"></span>
         <br>
     </div>
-     <!-- About Us Section -->
+    <!-- About Us Section -->
     <div class="about">
         <div class="content">
             <h1 style="font-family:Audiowide, sans-serif"> ABOUT <b style="color:yellow;">GET</b>FIT</h1>
@@ -146,7 +146,7 @@
         </div>
     </div>
 
- <!-- Our Team Section -->
+    <!-- Our Team Section -->
     <h1 style="font-family:Audiowide, sans-serif;text-align:center;background-color:#212225;color:white;">
         <br>Meet Our <b style="color:yellow;">GET</b>FIT Coaches</h1>
     <div class="ourTeam">
@@ -212,8 +212,8 @@
     </div>
     <!-- Our Courses Section -->
     <div class="ourCourses">
-         <h1 style="font-family:Audiowide, sans-serif;text-align:center;color:white;">
-        <br>Checkout Our <b style="color:yellow;">GET</b>FIT Courses!</h1>
+        <h1 style="font-family:Audiowide, sans-serif;text-align:center;color:white;">
+            <br>Checkout Our <b style="color:yellow;">GET</b>FIT Courses!</h1>
         <div class="row">
             <div class="column">
                 <div class="card">
@@ -237,7 +237,7 @@
 
             <div class="column">
                 <div class="card">
-                     <i class="fa-solid fa-person-running"></i>
+                    <i class="fa-solid fa-person-running"></i>
                     <div class="container">
                         <h2>Running</h2>
                         <p>Some text that describes me lorem ipsum ipsum lorem.</p>
@@ -280,52 +280,96 @@
 
         </div>
     </div>
-
-
 </div>
+<!-- Footer Section -->
+
+  <footer class="footer">
+  	 <div class="container">
+  	 	<div class="row">
+  	 		<div class="footer-col">
+                <h4 style="font-family:Audiowide, sans-serif;"><b style="color:yellow;">GET</b>FIT</h4>
+  	 			<ul>
+  	 				<li><a href="#">about us</a></li>
+  	 				<li><a href="#">our services</a></li>
+  	 				<li><a href="#">privacy policy</a></li>
+  	 				<li><a href="#">affiliate program</a></li>
+  	 			</ul>
+  	 		</div>
+  	 		<div class="footer-col">
+  	 			<h4>get help</h4>
+  	 			<ul>
+  	 				<li><a href="#">FAQ</a></li>
+  	 				<li><a href="#">membership</a></li>
+  	 				<li><a href="#">bookings</a></li>
+  	 				<li><a href="#">timetable</a></li>
+  	 				<li><a href="#">coaches</a></li>
+  	 			</ul>
+  	 		</div>
+  	 		<div class="footer-col">
+  	 			<h4>additional info</h4>
+  	 			<ul>
+  	 				<li><a href="#">all clubs</a></li>
+  	 				<li><a href="#">prices</a></li>
+  	 				<li><a href="#">news & blogs</a></li>
+  	 				<li><a href="#">careers</a></li>
+  	 			</ul>
+  	 		</div>
+  	 		<div class="footer-col">
+  	 			<h4>follow us</h4>
+  	 			<div class="social-links">
+  	 				<a href="#"><i class="fab fa-facebook-f"></i></a>
+  	 				<a href="#"><i class="fab fa-twitter"></i></a>
+  	 				<a href="#"><i class="fab fa-instagram"></i></a>
+  	 				<a href="#"><i class="fab fa-linkedin-in"></i></a>
+  	 			</div>
+  	 		</div>
+  	 	</div>
+  	 </div>
+  </footer>
+
 <script>
 
-//SlideShow
-  window.onscroll = function() {myFunction()};
+    //SlideShow section
+      window.onscroll = function() {myFunction()};
 
-    var header = document.getElementById("myHeader");
-    var sticky = header.offsetTop;
+        var header = document.getElementById("myHeader");
+        var sticky = header.offsetTop;
 
-    function myFunction() {
-      if (window.pageYOffset > sticky) {
-        header.classList.add("sticky");
-      } else {
-        header.classList.remove("sticky");
-      }
-    }
-        let slideIndex = 1;
-    showSlides(slideIndex);
+        function myFunction() {
+          if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+          } else {
+            header.classList.remove("sticky");
+          }
+        }
+            let slideIndex = 1;
+        showSlides(slideIndex);
 
-    // Next/previous controls
-    function plusSlides(n) {
-      showSlides(slideIndex += n);
-    }
+        // Next/previous controls
+        function plusSlides(n) {
+          showSlides(slideIndex += n);
+        }
 
-    // Thumbnail image controls
-    function currentSlide(n) {
-      showSlides(slideIndex = n);
-    }
+        // Thumbnail image controls
+        function currentSlide(n) {
+          showSlides(slideIndex = n);
+        }
 
-    function showSlides(n) {
-      let i;
-      let slides = document.getElementsByClassName("mySlides");
-      let dots = document.getElementsByClassName("dot");
-      if (n > slides.length) {slideIndex = 1}
-      if (n < 1) {slideIndex = slides.length}
-      for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-      }
-      for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-      }
-      slides[slideIndex-1].style.display = "block";
-      dots[slideIndex-1].className += " active";
-    }
+        function showSlides(n) {
+          let i;
+          let slides = document.getElementsByClassName("mySlides");
+          let dots = document.getElementsByClassName("dot");
+          if (n > slides.length) {slideIndex = 1}
+          if (n < 1) {slideIndex = slides.length}
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+          }
+          for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[slideIndex-1].style.display = "block";
+          dots[slideIndex-1].className += " active";
+        }
 
 </script>
 
