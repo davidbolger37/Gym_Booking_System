@@ -1,12 +1,3 @@
-/* Fonts styling */
-.w3-allerta {
-    font-family: "Allerta Stencil", Sans-serif, serif;
-}
-
-.raleway {
-    font-family: 'Raleway', sans-serif;
-}
-
 /* COLOURS:
 DARK GREY: #1E2328
 MID GREY: #2A2E34
@@ -115,7 +106,6 @@ body {
     display: flex;
 }
 
-
 .card {
     border-color: #2C3E50;
     margin-right: 10px;
@@ -145,17 +135,26 @@ footer {
 }
 
 .icon {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
 }
 
-.icon-container:hover {
-    background-color: #FFBF00;
+.social-links a{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	background-color: rgba(255,255,255,0.2);
+	margin:0 10px 10px 0;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 50%;
+	color: white;
+	transition: all 0.5s ease;
 }
 
-/* Footer Opening Hours Styling */
-.opening-hours {
-    display: flex;
+.social-links a:hover{
+	color: black;
+	background-color: yellow;
 }
 
 .weekdays {
@@ -166,16 +165,6 @@ footer {
 .times {
     flex: 1;
     text-align: right;
-}
-
-/* Contact icons styling */
-.contact-icon {
-    width: 32px;
-    height: 32px;
-    margin-right: 5px;
-    vertical-align: middle;
-    border-radius: 50%;
-    background-color: #FFBF00;
 }
 
 /* Contact information styling */
@@ -199,4 +188,9 @@ footer {
     background-color: #FED053;
     text-align: center;
     width: 130px;
+}
+
+/* Footer Opening Hours Styling */
+.opening-hours {
+    display: flex;
 }
