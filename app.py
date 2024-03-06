@@ -6,10 +6,12 @@ PASSWORD = 'root'
 HOST = 'localhost'
 DB_NAME = 'database_name'  # replace
 
-app = Flask(__name__, template_folder='website/templates')
+app = Flask(__name__, template_folder='website/templates', static_folder='website/static')
 
-# Static files (CSS, images, etc.)
-app.static_folder = 'static'
+# app = Flask(__name__, template_folder='website/templates')
+
+# # Static files (CSS, images, etc.)
+# app.static_folder = 'static'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + USERNAME + ':' + PASSWORD + '@' + HOST + '/' + DB_NAME
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -70,8 +72,25 @@ def add_initial_data():
 # def hello():
 #     return 'Hello!'
 
+@app.route('/')
+def index():
+    # Check if the user is logged in by looking for 'user_id' in session
+    if 'user_id' in session:
+        # Get the user's details from the database
+        user = User.query.get(session['user_id'])
+        # Check the first login flag
+        if session.get('first_login'):
+            # Since we've already shown 'Login successful', now we set it to False
+            session['first_login'] = False
+        else:
+            flash('Welcome back {}!'.format(user.first_name), 'info')
+        return render_template('index.html', user=user)
+    else:
+        # If user is not logged in, just render the index page
+        return render_template('index.html')
 
-@app.route('/', methods=['GET', 'POST'])
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if 'Login' in request.form:
         user_email = request.form['user_email']
@@ -82,7 +101,13 @@ def login():
         if user:
             # Set session
             session['user_id'] = user.id
-            # flash('Login successful !', 'success')
+            # Check if it's the user's first login by checking a flag in session
+            if 'first_login' not in session:
+                # Set the first login flag
+                session['first_login'] = True
+                flash('Login successful!', 'success')
+            else:
+                session['first_login'] = False
             return redirect(url_for('index'))
         else:
             alert_message = "Invalid email or password, please try again."
@@ -128,10 +153,14 @@ def register():
     return render_template('register.html', users_count=users_count_value)
 
 
-@app.route('/index')
-def index():
-    # You can render an HTML template for the index page
-    return render_template('index.html')
+@app.route('/logout')
+def logout():
+    # Remove 'user_id' from session
+    session.pop('user_id', None)
+    # You may want to flash a message confirming the user has logged out
+    flash('You have been logged out.', 'success')
+    # Redirect to index page or login page
+    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
