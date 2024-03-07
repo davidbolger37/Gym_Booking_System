@@ -6,10 +6,11 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="../static/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
     <title>Register - Gym Booking App</title>
 
     <style>
@@ -23,13 +24,13 @@
 </head>
 
 <body class="background">
-<h1 class="w3-allerta">Register</h1>
+<h1 style="font-family:Audiowide, sans-serif;">Register to <span style="color:yellow">GET</span>Fit</h1>
 
 <div class="w3-row">
     <!-- Create an Account Form -->
     <div class="w3-container w3-half">
         <form method="post" action="{{ request.path }}" class="w3-container w3-margin-top">
-            <h1>Create an Account</h1>
+            <h1 style="font-family:Audiowide, sans-serif;">Create an <span style="color:yellow">Acc</span>ount</h1>
             <label class="label-white">First Name: </label>
             <input type="text" name="first_name" class="inputText" placeholder="First Name" />
             <br>
@@ -51,8 +52,11 @@
     <!-- Active Members Section -->
     <div class="w3-container w3-half">
         <div class="w3-container w3-margin-top">
-            <img src="../static/images/icons/user.png" class="icon-container" style="width: 60px; margin-top: 16px;" />
-            <span style="color: white;">Members: {{ users_count }}</span>
+            <div class="social-links w3-margin">
+                <a><img src="../static/images/icons/user.png" alt="users" class="icon fab" /></a>
+                <span style="color: white;">Members: {{ users_count }}</span>
+            </div>
+
         </div>
     </div>
 </div>
@@ -66,27 +70,19 @@
 
 <div class="w3-row info">
     <div class="w3-container w3-third">
-        <h4>Gym Booking App</h4>
+        <h4 style="font-family:Audiowide, sans-serif;"><b style="color:yellow;">GET</b>FIT</h4>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-        <!-- Instagram -->
-        <a href="https://www.instagram.com" target="_blank" class="icon-container">
-            <img class="icon" loading="lazy" src="../static/images/icons/instagram.png" alt="Instagram">
-        </a>
 
-        <!-- Facebook -->
-        <a href="https://www.facebook.com" target="_blank" class="icon-container">
-            <img class="icon" loading="lazy" src="../static/images/icons/facebook.png" alt="Facebook">
-        </a>
-
-        <!-- Twitter -->
-        <a href="https://www.twitter.com" target="_blank" class="icon-container">
-            <img class="icon" loading="lazy" src="../static/images/icons/twitter.png" alt="Twitter">
-        </a>
+        <div class="social-links">
+            <a href="https://www.facebook.com"><i class="fab fa-facebook-f"><img class="icon" src="../static/images/icons/facebook.png" alt="Facebook"></i></a>
+            <a href="https://www.twitter.com"><i class="fab fa-twitter"><img class="icon" src="../static/images/icons/twitter.png" alt="Twitter"></i></a>
+            <a href="https://www.instagram.com"><i class="fab fa-instagram"><img class="icon" src="../static/images/icons/instagram.png" alt="Instagram"></i></a>
+        </div>
     </div>
 
     <div class="w3-container w3-third">
-        <h4>Opening Hours</h4>
+        <h4 style="color: yellow">Opening Hours</h4>
         <div class="w3-center">
             <div class="opening-hours">
                 <span class="weekdays">
@@ -106,11 +102,11 @@
     </div>
 
     <div class="w3-container w3-third">
-        <h4>Contact Us</h4>
-        <div>
-            <p><img class="contact-icon" src="../static/images/icons/phone.png" alt="Phone"> +123456789</p>
-            <p><img class="contact-icon" src="../static/images/icons/email.png" alt="Email"> gymapp@gymapp.com</p>
-            <p><img class="contact-icon" src="../static/images/icons/location2.png" alt="Location"> 123 Street, City</p>
+        <h4 style="color: yellow">Contact Us</h4>
+        <div class="social-links">
+            <p><a><img class="icon fab" src="../static/images/icons/phone.png" alt="Phone"></a> +123456789</p>
+            <p><a><img class="icon fab" src="../static/images/icons/email.png" alt="Email"></a> gymapp@gymapp.com</p>
+            <p><a><img class="icon fab" src="../static/images/icons/location2.png" alt="Location"></a> 123 Street, City</p>
         </div>
     </div>
 </div>

@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome to GETFIT!</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/index.css">
-    <script src="..\static\js\index.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
     <script src="https://kit.fontawesome.com/dc868a21c4.js" crossorigin="anonymous"></script>
     <!--Get your code at fontawesome.com-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
-
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css">
     <!--    {% if success_message %}-->
     <!--    <script>-->
     <!--        window.onload = function() {-->
@@ -18,7 +17,6 @@
     <!--{% endif %}-->
 </head>
 <body>
-
 <!-- Header -->
 <header id="myHeader">
     <!-- Navigation Bar -->
@@ -30,8 +28,14 @@
             <a href="/about">ABOUT US</a>
             <a href="/booking">BOOKING</a>
             <a href="/team">TEAM</a>
+            {% if 'user_id' in session %}
+            <!-- If the user is logged in, show the logout button -->
+            <a href="/logout">LOGOUT</a>
+            {% else %}
+            <!-- If the user is not logged in, show login and register buttons -->
             <a href="/login">LOGIN</a>
             <a href="/register">REGISTER</a>
+            {% endif %}
             <a href="/contact">CONTACT US</a>
             <br>
             <div class="sidebarText">
@@ -56,14 +60,28 @@
             <li class="nav-item"><a href="/about">ABOUT US</a></li>
             <li class="nav-item"><a href="/booking">BOOKING</a></li>
             <li class="nav-item"><a href="/team">TEAM</a></li>
+            {% if 'user_id' in session %}
+            <!-- If the user is logged in, show the logout button -->
+            <li class="nav-item"><a href="/logout">LOGOUT</a></li>
+            {% else %}
+            <!-- If the user is not logged in, show login and register buttons -->
             <li class="nav-item"><a href="/login">LOGIN</a></li>
             <li class="nav-item"><a href="/register">REGISTER</a></li>
+            {% endif %}
             <li class="nav-item"><a href="/contact" class="contact">CONTACT US</a></li>
         </ul>
     </nav>
 </header>
-
-
+  <!-- Flash Messages Section -->
+     {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div id="flash-message" class="alert">
+                {% for category, message in messages %}
+                    <div class="{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
 <div id="main">
     <!-- Slideshow container -->
     <div class="slideshow-container">
@@ -283,49 +301,49 @@
 </div>
 <!-- Footer Section -->
 
-  <footer class="footer">
-  	 <div class="container">
-  	 	<div class="row">
-  	 		<div class="footer-col">
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-col">
                 <h4 style="font-family:Audiowide, sans-serif;"><b style="color:yellow;">GET</b>FIT</h4>
-  	 			<ul>
-  	 				<li><a href="#">about us</a></li>
-  	 				<li><a href="#">our services</a></li>
-  	 				<li><a href="#">privacy policy</a></li>
-  	 				<li><a href="#">affiliate program</a></li>
-  	 			</ul>
-  	 		</div>
-  	 		<div class="footer-col">
-  	 			<h4>get help</h4>
-  	 			<ul>
-  	 				<li><a href="#">FAQ</a></li>
-  	 				<li><a href="#">membership</a></li>
-  	 				<li><a href="#">bookings</a></li>
-  	 				<li><a href="#">timetable</a></li>
-  	 				<li><a href="#">coaches</a></li>
-  	 			</ul>
-  	 		</div>
-  	 		<div class="footer-col">
-  	 			<h4>additional info</h4>
-  	 			<ul>
-  	 				<li><a href="#">all clubs</a></li>
-  	 				<li><a href="#">prices</a></li>
-  	 				<li><a href="#">news & blogs</a></li>
-  	 				<li><a href="#">careers</a></li>
-  	 			</ul>
-  	 		</div>
-  	 		<div class="footer-col">
-  	 			<h4>follow us</h4>
-  	 			<div class="social-links">
-  	 				<a href="#"><i class="fab fa-facebook-f"></i></a>
-  	 				<a href="#"><i class="fab fa-twitter"></i></a>
-  	 				<a href="#"><i class="fab fa-instagram"></i></a>
-  	 				<a href="#"><i class="fab fa-linkedin-in"></i></a>
-  	 			</div>
-  	 		</div>
-  	 	</div>
-  	 </div>
-  </footer>
+                <ul>
+                    <li><a href="#">about us</a></li>
+                    <li><a href="#">our services</a></li>
+                    <li><a href="#">privacy policy</a></li>
+                    <li><a href="#">affiliate program</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>get help</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">membership</a></li>
+                    <li><a href="#">bookings</a></li>
+                    <li><a href="#">timetable</a></li>
+                    <li><a href="#">coaches</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>additional info</h4>
+                <ul>
+                    <li><a href="#">all clubs</a></li>
+                    <li><a href="#">prices</a></li>
+                    <li><a href="#">news & blogs</a></li>
+                    <li><a href="#">careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>follow us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
 <script>
 
@@ -372,6 +390,7 @@
         }
 
 </script>
-
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+<script src="../static/js/index.js"></script>
 </body>
 </html>
