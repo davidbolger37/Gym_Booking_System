@@ -29,7 +29,7 @@ booking = db.Table('booking',
 
 
 class User(db.Model):
-    __tablename__ = 'user_table'
+    __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(120), nullable=False)
     last_name = db.Column(db.String(120), nullable=False)
@@ -52,7 +52,7 @@ class User(db.Model):
 
 
 class Class(db.Model):
-    __tablename__ = 'class_table'
+    __tablename__ = 'class'
     id = db.Column(db.Integer, primary_key=True)
     class_name = db.Column(db.String(120), nullable=False)
     day = db.Column(db.String(120), nullable=False)
@@ -186,6 +186,31 @@ def logout():
 @app.route('/booking')
 def booking():
     return render_template('booking.html')
+
+
+@app.route('/create-class', methods=['GET', 'POST'])
+def create_class():
+    if request.method == 'POST':
+        # Retrieve form data
+        class_name = request.form['class_name']
+        day = request.form['day']
+        time_duration = request.form['time_duration']
+
+        # Create a new Class instance
+        new_class = Class(class_name=class_name, day=day, time_duration=time_duration)
+
+        # Add the new class to the session and commit it to the database
+        db.session.add(new_class)
+        db.session.commit()
+
+        # Flash a success message
+        flash('Class created successfully!', 'success')
+
+        # Redirect to the class listing page (booking)
+        return redirect(url_for('index'))
+
+    # For a GET request, just render the class creation form
+    return render_template('create_class.html')
 
 
 if __name__ == '__main__':
