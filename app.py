@@ -1,5 +1,6 @@
 from flask import Flask, request, flash, url_for, redirect, session, render_template, render_template_string
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.sql import func
 
 USERNAME = 'root'
 PASSWORD = 'root'
@@ -19,6 +20,13 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///gym.sqlite3'
 app.config['SECRET_KEY'] = 'root'
 db = SQLAlchemy(app)
 
+# Association table for many-to-many relationship between User and Class
+booking = db.Table('booking',
+                   db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+                   db.Column('class_id', db.Integer, db.ForeignKey('class.id'), primary_key=True),
+                   db.Column('booking_at', db.DateTime(timezone=True), default=func.now())
+                   )
+
 
 class User(db.Model):
     __tablename__ = 'user_table'
@@ -28,6 +36,8 @@ class User(db.Model):
     user_email = db.Column(db.String(120), unique=True, nullable=False)
     user_password = db.Column(db.String(120), nullable=False)
     role = db.Column(db.String(120), nullable=False)
+    # Relationship to Class through the bookings association table
+    classes = db.relationship('Class', secondary=booking, back_populates='users')
 
     def __init__(self, first_name, last_name, user_email, user_password, role):
         self.first_name = first_name
@@ -39,6 +49,16 @@ class User(db.Model):
     @classmethod
     def count_users(cls):
         return cls.query.count()
+
+
+class Class(db.Model):
+    __tablename__ = 'class_table'
+    id = db.Column(db.Integer, primary_key=True)
+    class_name = db.Column(db.String(120), nullable=False)
+    day = db.Column(db.String(120), nullable=False)
+    time_duration = db.Column(db.String(500), nullable=False)
+    # Relationship to User through the bookings association table
+    users = db.relationship('User', secondary=booking, back_populates='classes')
 
 
 def create_tables():
@@ -162,9 +182,11 @@ def logout():
     # Redirect to index page or login page
     return redirect(url_for('index'))
 
+
 @app.route('/booking')
 def booking():
     return render_template('booking.html')
+
 
 if __name__ == '__main__':
     create_tables()
