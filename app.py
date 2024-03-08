@@ -162,6 +162,9 @@ def logout():
     # Redirect to index page or login page
     return redirect(url_for('index'))
 
+@app.route('/booking')
+def booking():
+    return render_template('booking.html')
 
 if __name__ == '__main__':
     create_tables()
