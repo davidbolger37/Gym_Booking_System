@@ -1,6 +1,7 @@
 from flask import Flask, request, flash, url_for, redirect, session, render_template, render_template_string
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
+from sqlalchemy.exc import IntegrityError
 
 USERNAME = 'root'
 PASSWORD = 'root'
@@ -8,12 +9,7 @@ HOST = 'localhost'
 DB_NAME = 'database_name'  # replace
 
 app = Flask(__name__, template_folder='website/templates', static_folder='website/static')
-
-# app = Flask(__name__, template_folder='website/templates')
-
-# # Static files (CSS, images, etc.)
-# app.static_folder = 'static'
-
+ 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + USERNAME + ':' + PASSWORD + '@' + HOST + '/' + DB_NAME
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///gym.sqlite3'
@@ -85,6 +81,29 @@ def add_initial_data():
         db.session.commit()
 
 
+def add_admin():
+    # Check if an admin user already exists
+    admin_exists = User.query.filter_by(role='admin').first()
+    if not admin_exists:
+        admin = User(
+            first_name='admin',
+            last_name='admin',
+            user_email='admin@example.com',
+            user_password='admin',
+            role='admin'
+        )
+        db.session.add(admin)
+        db.session.commit()
+
+
+# def reset_classes():
+#     db.session.query(Class).delete()
+#     db.session.commit()
+#
+#     db.session.execute("VACUUM")
+#     db.session.commit()
+
+
 ###################################################
 #                    ROUTES                       #
 ###################################################
@@ -104,6 +123,7 @@ def index():
             session['first_login'] = False
         else:
             flash('Welcome back {}!'.format(user.first_name), 'info')
+            flash(user.role)
         return render_template('index.html', user=user)
     else:
         # If user is not logged in, just render the index page
@@ -121,6 +141,7 @@ def login():
         if user:
             # Set session
             session['user_id'] = user.id
+            session['user_role'] = user.role  # Store user role in session
             # Check if it's the user's first login by checking a flag in session
             if 'first_login' not in session:
                 # Set the first login flag
@@ -185,29 +206,52 @@ def logout():
 
 @app.route('/booking')
 def booking():
-    return render_template('booking.html')
+    user_role = None
+    if 'user_id' in session:
+        user = User.query.get(session['user_id'])
+        user_role = user.role
+    # Fetch all classes and sort them by day
+    classes = Class.query.all()
+    classes_by_day = {}
+    for class_ in classes:
+        if class_.day not in classes_by_day:
+            classes_by_day[class_.day] = []
+        classes_by_day[class_.day].append(class_)
+    return render_template('booking.html', user_role=user_role, classes_by_day=classes_by_day)
 
 
 @app.route('/create-class', methods=['GET', 'POST'])
 def create_class():
+    if 'user_id' not in session or session.get('user_role') != 'admin':
+        # If the user is not logged in or not an admin, redirect them
+        flash('You do not have permission to access this page.', 'error')
+        return redirect(url_for('login'))
+
     if request.method == 'POST':
         # Retrieve form data
-        class_name = request.form['class_name']
-        day = request.form['day']
-        time_duration = request.form['time_duration']
+        class_name = request.form.get('class_name')
+        day = request.form.get('day')
+        time_duration = request.form.get('time_duration')
 
-        # Create a new Class instance
-        new_class = Class(class_name=class_name, day=day, time_duration=time_duration)
+        # Check if the class already exists to prevent duplicates
+        existing_class = Class.query.filter_by(class_name=class_name, day=day, time_duration=time_duration).first()
 
-        # Add the new class to the session and commit it to the database
-        db.session.add(new_class)
-        db.session.commit()
+        if existing_class:
+            flash('Class already exists.', 'error')
+            return redirect(url_for('booking'))
 
-        # Flash a success message
-        flash('Class created successfully!', 'success')
+        # Create a new Class instance if it doesn't exist
+        try:
+            new_class = Class(class_name=class_name, day=day, time_duration=time_duration)
+            db.session.add(new_class)
+            db.session.commit()
+            flash('Class created successfully!', 'success')
+        except IntegrityError:
+            db.session.rollback()
+            flash('An error occurred while creating the class.', 'error')
 
         # Redirect to the class listing page (booking)
-        return redirect(url_for('index'))
+        return redirect(url_for('booking'))
 
     # For a GET request, just render the class creation form
     return render_template('create_class.html')
@@ -216,4 +260,6 @@ def create_class():
 if __name__ == '__main__':
     create_tables()
     add_initial_data()
+    add_admin()
+    # reset_classes()
     app.run(debug=True)
