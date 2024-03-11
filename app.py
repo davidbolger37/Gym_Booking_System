@@ -122,8 +122,7 @@ def index():
             # Since we've already shown 'Login successful', now we set it to False
             session['first_login'] = False
         else:
-            flash('Welcome back {}!'.format(user.first_name), 'info')
-            flash(user.role)
+            flash('Welcome {}!'.format(user.first_name), 'info')
         return render_template('index.html', user=user)
     else:
         # If user is not logged in, just render the index page
