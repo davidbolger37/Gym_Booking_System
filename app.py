@@ -297,6 +297,27 @@ def update_class(class_id):
     return render_template('update_class.html', class_=class_to_update)
 
 
+@app.route('/delete-class/<int:class_id>', methods=['POST'])
+def delete_class(class_id):
+    if 'user_id' not in session or session.get('user_role') != 'admin':
+        flash('You do not have permission to access this page.', 'error')
+        return redirect(url_for('login'))
+
+    class_to_delete = Class.query.get(class_id)
+    if class_to_delete:
+        db.session.delete(class_to_delete)
+        try:
+            db.session.commit()
+            flash('Class has been deleted successfully!', 'success')
+        except:
+            db.session.rollback()  # Roll back the changes if something goes wrong
+            flash('An error occurred while deleting the class.', 'error')
+    else:
+        flash('Class doesn\'t exist', 'error')
+
+    return redirect(url_for('booking'))
+
+
 if __name__ == '__main__':
     create_tables()
     add_initial_data()
