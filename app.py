@@ -9,7 +9,7 @@ HOST = 'localhost'
 DB_NAME = 'database_name'  # replace
 
 app = Flask(__name__, template_folder='website/templates', static_folder='website/static')
- 
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + USERNAME + ':' + PASSWORD + '@' + HOST + '/' + DB_NAME
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///gym.sqlite3'
@@ -237,7 +237,7 @@ def create_class():
 
         if existing_class:
             flash('Class already exists.', 'error')
-            return redirect(url_for('booking'))
+            return redirect(url_for('create_class'))
 
         # Create a new Class instance if it doesn't exist
         try:
@@ -254,6 +254,47 @@ def create_class():
 
     # For a GET request, just render the class creation form
     return render_template('create_class.html')
+
+
+@app.route('/update-class/<int:class_id>', methods=['GET', 'POST'])
+def update_class(class_id):
+    if 'user_id' not in session or session.get('user_role') != 'admin':
+        # If the user is not logged in or not an admin, redirect them
+        flash('You do not have permission to access this page.', 'error')
+        return redirect(url_for('login'))
+
+    # Retrieve the class from the database
+    class_to_update = Class.query.get_or_404(class_id)
+
+    if request.method == 'POST':
+        # Retrieve form data
+        class_name = request.form.get('class_name')
+        day = request.form.get('day')
+        time_duration = request.form.get('time_duration')
+
+        # Check if the class already exists to prevent duplicates
+        existing_class = Class.query.filter_by(class_name=class_name, day=day, time_duration=time_duration).first()
+
+        if existing_class:
+            flash('A class with the same name, day, and time already exists.', 'error')
+            return redirect(url_for('update_class', class_id=class_id))
+
+        # Update the Class instance if it already doesn't exist
+        try:
+            class_to_update.name = class_name
+            class_to_update.day = day
+            class_to_update.time_duration = time_duration
+            db.session.commit()
+            flash(f'Class:{class_name} updated successfully!', 'success')
+        except IntegrityError:
+            db.session.rollback()
+            flash('An error occurred while updating the class.', 'error')
+
+        # Redirect to the class listing page (booking)
+        return redirect(url_for('booking'))
+
+    # For a GET request, just render the class update form
+    return render_template('update_class.html', class_=class_to_update)
 
 
 if __name__ == '__main__':
