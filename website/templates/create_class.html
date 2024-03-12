@@ -11,6 +11,16 @@
     Create New Class
   <a href="/booking" class="split">BACK</a>
 </div>
+ <!-- Flash Messages Section -->
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    <div id="flash-message" class="alert">
+                        {% for category, message in messages %}
+                        <div class="{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% endwith %}
 <body>
 <form method="post">
     <label for="class_name">Class Name:</label>
@@ -31,5 +41,16 @@
 
     <input type="submit" value="Create Class">
 </form>
+<script>
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const flashMessage = document.getElementById('flash-message');
+    if (flashMessage) {
+        setTimeout(() => {
+            flashMessage.classList.add('fade-out');
+        }, 4000); // 4000ms or 4 seconds until fade-out starts
+    }
+});
+</script>
 </body>
 </html>
