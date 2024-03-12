@@ -281,7 +281,7 @@ def update_class(class_id):
 
         # Update the Class instance if it already doesn't exist
         try:
-            class_to_update.name = class_name
+            class_to_update.class_name = class_name
             class_to_update.day = day
             class_to_update.time_duration = time_duration
             db.session.commit()
