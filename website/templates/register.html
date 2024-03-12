@@ -45,9 +45,9 @@
             <br>
             <input type="hidden" name="role" value="user">
             <br>
+            <a href="{{ url_for('login') }}" class="backButton w3-left">BACK</a>
             <input type="submit" value="Register" class="inputSubmit w3-right" />
         </form>
-        <br><br><br><br><br><br>
     </div>
     <!-- Active Members Section -->
     <div class="w3-container w3-half">
@@ -56,17 +56,14 @@
                 <a><img src="../static/images/icons/user.png" alt="users" class="icon fab" /></a>
                 <span style="color: white;">Members: {{ users_count }}</span>
             </div>
-
         </div>
     </div>
 </div>
 
-
 <!-- BACK button -->
 <!-- needs to be fixed - when screen is smaller, button is covered by footer -->
-<a href="{{ url_for('login') }}" class="backButton w3-left">BACK</a>
 
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br>
 
 <div class="w3-row info">
     <div class="w3-container w3-third">
@@ -109,11 +106,7 @@
             <p><a><img class="icon fab" src="../static/images/icons/location2.png" alt="Location"></a> 123 Street, City</p>
         </div>
     </div>
+    <p style="text-align: center;">© 2024 INFUSE PROJECT. All rights reserved.</p>
 </div>
-
-<footer class="w3-bottom">
-    <p>© 2024 INFUSE PROJECT. All rights reserved.</p>
-</footer>
-
 </body>
 </html>

@@ -113,27 +113,13 @@ body {
 
 /* Info */
 .info {
-    /*position: fixed;*/
     bottom: 60px;
     width: 100%;
     padding: 10px;
     background-color: #1E2328;
     color: white;
-    ext-align: center;
-}
-
-/*
-footer {
-    position: absolute;
-    height: 100px;
-    bottom: 0;
-    width: 100%;
-    padding: 10px;
-    background-color: #1E2328;
-    color: white;
-    ext-align: center;
     text-align: center;
-}*/
+}
 
 .icon {
     width: 28px;
@@ -191,7 +177,7 @@ footer {
     width: 130px;
 }
 
-/* Footer Opening Hours Styling */
+/* Footer Opening Hours Styling*/
 .opening-hours {
     display: flex;
 }
