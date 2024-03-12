@@ -3,54 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>Update Class Details</title>
-     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/update_class.css') }}">
-     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
-     <link rel="stylesheet" type="text/css" href="../static/css/update_class.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/update_class.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+    <link rel="stylesheet" type="text/css" href="../static/css/update_class.css">
 </head>
 <div class="topnav">
     Update Class Details
-  <a href="/booking" class="split">BACK</a>
+    <a href="/booking" class="split">BACK</a>
 </div>
-  <!-- Flash Messages Section -->
-                    {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                    <div id="flash-message" class="alert">
-                        {% for category, message in messages %}
-                        <div class="{{ category }}">{{ message }}</div>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                    {% endwith %}
+<!-- Flash Messages Section -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div id="flash-message" class="alert">
+    {% for category, message in messages %}
+    <div class="{{ category }}">{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
 <body>
-<form method="post" >
+<form method="post">
     <label for="class_name">Class Name:</label>
     <input type="text" id="class_name" name="class_name" value="{{class_.class_name}}" placeholder="Enter class name.."><br>
 
     <label for="time_duration">Time Slot:</label>
-    <input type="text" id="time_duration" name="time_duration" value="{{class_.time_duration}}" placeholder="Eg. 11:00 - 12:00" required><br>
+    <input type="text" id="time_duration" name="time_duration" value="{{class_.time_duration}}"
+           placeholder="Eg. 11:00 - 12:00" required><br>
 
     <label for="day">Day:</label>
-    <select id="day" name="day" value="{{class_.day}}" required>
-        <option value="monday">Monday</option>
-        <option value="tuesday">Tuesday</option>
-        <option value="wednesday">Wednesday</option>
-        <option value="thursday">Thursday</option>
-        <option value="friday">Friday</option>
-        <option value="saturday">Saturday</option>
+    <select id="day" name="day" required>
+        <option value="monday" {% if class_.day=='monday' %}selected{% endif %}>Monday</option>
+        <option value="tuesday" {% if class_.day=='tuesday' %}selected{% endif %}>Tuesday</option>
+        <option value="wednesday" {% if class_.day=='wednesday' %}selected{% endif %}>Wednesday</option>
+        <option value="thursday" {% if class_.day=='thursday' %}selected{% endif %}>Thursday</option>
+        <option value="friday" {% if class_.day=='friday' %}selected{% endif %}>Friday</option>
+        <option value="saturday" {% if class_.day=='saturday' %}selected{% endif %}>Saturday</option>
     </select><br>
+
 
     <input type="submit" value="Update Class">
 </form>
 <script>
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    const flashMessage = document.getElementById('flash-message');
-    if (flashMessage) {
-        setTimeout(() => {
-            flashMessage.classList.add('fade-out');
-        }, 4000); // 4000ms or 4 seconds until fade-out starts
-    }
-});
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const flashMessage = document.getElementById('flash-message');
+        if (flashMessage) {
+            setTimeout(() => {
+                flashMessage.classList.add('fade-out');
+            }, 4000); // 4000ms or 4 seconds until fade-out starts
+        }
+    });
 </script>
 </body>
 </html>
