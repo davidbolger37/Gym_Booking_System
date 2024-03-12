@@ -113,7 +113,7 @@ body {
 
 /* Info */
 .info {
-    position: fixed;
+    /*position: fixed;*/
     bottom: 60px;
     width: 100%;
     padding: 10px;
@@ -122,9 +122,10 @@ body {
     ext-align: center;
 }
 
-/* Footer */
+/*
 footer {
-    position: auto;
+    position: absolute;
+    height: 100px;
     bottom: 0;
     width: 100%;
     padding: 10px;
@@ -132,7 +133,7 @@ footer {
     color: white;
     ext-align: center;
     text-align: center;
-}
+}*/
 
 .icon {
     width: 28px;
