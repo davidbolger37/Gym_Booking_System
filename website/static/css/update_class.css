@@ -17,7 +17,6 @@
   color: yellow;
   padding: 20px;
   font-size: 30px;
-  margin-bottom: 30px;
   overflow: hidden;
 }
 
@@ -44,7 +43,7 @@
 form{
     padding: 60px 100px 60px 100px;
     background-color: #242728;
-    margin: 0px 300px 0px 300px;
+    margin: 30px 300px 0px 300px;
 }
 
 /* Form Label Style */
@@ -82,3 +81,47 @@ input[type=submit]:hover {
   background-color: black;
    color: yellow;
 }
+
+
+/*flash messages*/
+
+.alert {
+    position: relative;
+    left:50%;
+    transform: translateX(-50%);
+    z-index: 1000; /* Make sure it's above other elements */
+    background-color:black;
+    color:yellow;
+    text-align:center;
+    width:100%;
+    padding:10px;
+    font-size:20px;
+    margin-bottom:20px;
+}
+
+/* Keyframes for the fade-out effect */
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Initially the message is fully visible */
+#flash-message {
+    animation-name: stayVisible;
+    animation-duration: 4s; /* Adjust the time for how long it stays */
+}
+
+/* After 4s, fade out the message in 1s */
+#flash-message.fade-out {
+    animation-name: fadeOut;
+    animation-duration: 1s;
+    animation-fill-mode: forwards; /* Keeps the element in the state of the last keyframe */
+    animation-delay: 3s; /* Adjust the delay to match how long the message stays */
+}
+
+/* To keep the message visible before it fades out */
+@keyframes stayVisible {
+    from { opacity: 1; }
+    to { opacity: 1; }
+}
+
