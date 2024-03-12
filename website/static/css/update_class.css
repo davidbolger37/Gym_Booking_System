@@ -1,0 +1,84 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ body{
+    font-family: "Audiowide", sans-serif;
+    background-color:#1d1e20;
+ }
+
+/* Create a top navigation bar with a black background color  */
+.topnav{
+  background-color: black;
+  height: 80px;
+  color: yellow;
+  padding: 20px;
+  font-size: 30px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+/* Create a right-aligned (split) link inside the navigation bar */
+.topnav a.split {
+  float: right;
+  text-align: center;
+  padding: 5px 10px;
+  text-decoration: none;
+  font-size: 17px;
+  border: 2px solid white;
+  color: white;
+}
+
+
+/* Change the color of links on hover */
+.topnav a.split:hover {
+  background-color: yellow;
+  border: 2px solid yellow;
+  color: black;
+}
+
+/* Form Style */
+form{
+    padding: 60px 100px 60px 100px;
+    background-color: #242728;
+    margin: 0px 300px 0px 300px;
+}
+
+/* Form Label Style */
+form label{
+  color:white;
+  font-size:20px;
+  padding-bottom:20px;
+}
+
+/* Style inputs */
+  input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 20px 0;
+  display: inline-block;
+  border: 3px solid yellow;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Style the submit button */
+input[type=submit] {
+  width: 100%;
+  background-color: yellow;
+  color: black;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Add a background color to the submit button on mouse-over */
+input[type=submit]:hover {
+  background-color: black;
+   color: yellow;
+}
