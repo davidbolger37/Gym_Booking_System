@@ -23,7 +23,6 @@ GETFIT is an online booking system specifically designed for gym members to sche
 <code><a href="https://www.w3schools.com/html/" target="_blank"> <img height="100" src="https://www.vectorlogo.zone/logos/w3_html5/w3_html5-ar21.svg"></a></code>
 <code><a href="https://www.w3schools.com/css/" target="_blank"> <img height="100" src="https://www.vectorlogo.zone/logos/w3_css/w3_css-ar21.svg"></a></code>
 <code><a href="https://www.w3schools.com/js/" target="_blank"> <img height="100" src="https://www.vectorlogo.zone/logos/javascript/javascript-ar21.svg"></a></code> 
-### Middleware
 <code><a href="https://www.python.org/" target="_blank"> <img height="100" src="https://www.vectorlogo.zone/logos/python/python-ar21.svg"></a></code>
 <code><a href="https://flask.palletsprojects.com/" target="_blank"><img height="100" src="https://www.vectorlogo.zone/logos/pocoo_flask/pocoo_flask-ar21.svg"></a></code>
 <code><a href="https://www.sqlalchemy.org/" target="_blank"> <img height="100" width="200" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/sqlalchemy/sqlalchemy-original.svg"></a></code>
