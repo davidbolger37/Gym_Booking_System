@@ -1,4 +1,5 @@
 # GETFIT - A Gym Booking System
+![GETFIT_home](https://github.com/davidbolger37/Gym_Booking_System/assets/118574384/e0c0dfb3-4ca0-47c9-bec3-a2926c738f04)
 
 ## Project Description
 
