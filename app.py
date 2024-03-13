@@ -1,39 +1,30 @@
 from flask import Flask, request, flash, url_for, redirect, session, render_template, render_template_string
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.sql import func
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy import Enum
 
 USERNAME = 'root'
-PASSWORD = 'root'
+PASSWORD = ''
 HOST = 'localhost'
-DB_NAME = 'database_name'  # replace
+DB_NAME = 'gym_db'
 
 app = Flask(__name__, template_folder='website/templates', static_folder='website/static')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + USERNAME + ':' + PASSWORD + '@' + HOST + '/' + DB_NAME
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///gym.sqlite3'
 app.config['SECRET_KEY'] = 'root'
 db = SQLAlchemy(app)
 
-# Association table for many-to-many relationship between User and Class
-booking = db.Table('booking',
-                   db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
-                   db.Column('class_id', db.Integer, db.ForeignKey('class.id'), primary_key=True),
-                   db.Column('booking_at', db.DateTime(timezone=True), default=func.now())
-                   )
-
 
 class User(db.Model):
-    __tablename__ = 'user'
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(120), nullable=False)
-    last_name = db.Column(db.String(120), nullable=False)
-    user_email = db.Column(db.String(120), unique=True, nullable=False)
-    user_password = db.Column(db.String(120), nullable=False)
-    role = db.Column(db.String(120), nullable=False)
-    # Relationship to Class through the bookings association table
-    classes = db.relationship('Class', secondary=booking, back_populates='users')
+    first_name = db.Column(db.String(40), nullable=False)
+    last_name = db.Column(db.String(40), nullable=False)
+    user_email = db.Column(db.String(255), unique=True, nullable=False)
+    user_password = db.Column(db.String(255), nullable=False)
+    role = db.Column(Enum('user', 'admin'), nullable=False)
+    bookings = db.relationship('Booking', back_populates='user')
 
     def __init__(self, first_name, last_name, user_email, user_password, role):
         self.first_name = first_name
@@ -50,58 +41,29 @@ class User(db.Model):
 class Class(db.Model):
     __tablename__ = 'class'
     id = db.Column(db.Integer, primary_key=True)
-    class_name = db.Column(db.String(120), nullable=False)
-    day = db.Column(db.String(120), nullable=False)
-    time_duration = db.Column(db.String(500), nullable=False)
-    # Relationship to User through the bookings association table
-    users = db.relationship('User', secondary=booking, back_populates='classes')
+    class_name = db.Column(db.String(40), nullable=False)
+    day = db.Column(db.String(15), nullable=False)
+    time_duration = db.Column(db.String(40), nullable=False)
+    bookings = db.relationship('Booking', back_populates='class_')
+
+    def __init__(self, class_name, day, time_duration):
+        self.class_name = class_name
+        self.day = day
+        self.time_duration = time_duration
 
 
-def create_tables():
-    db.create_all()
+class Booking(db.Model):
+    __tablename__ = 'booking'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    class_id = db.Column(db.Integer, db.ForeignKey('class.id'), nullable=False)
+    booking_at = db.Column(db.DateTime(timezone=True), default=db.func.now())
+    user = db.relationship('User', back_populates='bookings')
+    class_ = db.relationship('Class', back_populates='bookings')
 
-
-def add_initial_data():
-    # Create initial users if one already doesn't exist
-    if db.session.query(User).count() == 0:
-        user1 = User(first_name='user1', last_name="user1", user_email='user1@gmail.com', user_password='user1',
-                     role="user")
-        user2 = User(first_name='user2', last_name="user2", user_email='user2@gmail.com', user_password='user2',
-                     role="user")
-        user3 = User(first_name='user3', last_name="user3", user_email='user3@gmail.com', user_password='user3',
-                     role="user")
-        user4 = User(first_name='user4', last_name="user4", user_email='user4@gmail.com', user_password='user4',
-                     role="user")
-        user5 = User(first_name='user5', last_name="user5", user_email='user5@gmail.com', user_password='user5',
-                     role="user")
-        user6 = User(first_name='user6', last_name="user6", user_email='user6@gmail.com', user_password='user6',
-                     role="user")
-        users = [user1, user2, user3, user4, user5, user6]
-        db.session.add_all(users)
-        db.session.commit()
-
-
-def add_admin():
-    # Check if an admin user already exists
-    admin_exists = User.query.filter_by(role='admin').first()
-    if not admin_exists:
-        admin = User(
-            first_name='admin',
-            last_name='admin',
-            user_email='admin@example.com',
-            user_password='admin',
-            role='admin'
-        )
-        db.session.add(admin)
-        db.session.commit()
-
-
-# def reset_classes():
-#     db.session.query(Class).delete()
-#     db.session.commit()
-#
-#     db.session.execute("VACUUM")
-#     db.session.commit()
+    def __init__(self, user_id, class_id):
+        self.user_id = user_id
+        self.class_id = class_id
 
 
 ###################################################
@@ -251,7 +213,6 @@ def create_class():
 
         # Redirect to the class listing page (booking)
         return redirect(url_for('booking'))
-
     # For a GET request, just render the class creation form
     return render_template('create_class.html')
 
@@ -319,8 +280,6 @@ def delete_class(class_id):
 
 
 if __name__ == '__main__':
-    create_tables()
-    add_initial_data()
-    add_admin()
-    # reset_classes()
+    #create_tables()
+    #add_initial_data()
     app.run(debug=True)
