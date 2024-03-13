@@ -26,7 +26,7 @@ GETFIT is an online booking system specifically designed for gym members to sche
 ### Backend
 <code><a href="https://www.python.org/" target="_blank"> <img height="100" src="https://www.vectorlogo.zone/logos/python/python-ar21.svg"></a></code>
 <code><a href="https://flask.palletsprojects.com/" target="_blank"><img height="100" src="https://www.vectorlogo.zone/logos/pocoo_flask/pocoo_flask-ar21.svg"></a></code>
-<code><a href="https://www.sqlalchemy.org/" target="_blank"> <img height="100" width="200" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/sqlalchemy/sqlalchemy-original.svg"></a></code>
+<code><a href="https://www.sqlalchemy.org/" target="_blank"> <img height="100" width="200" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/sqlalchemy/sqlalchemy-original.svg"></a></code><br/>
 <code><a href="https://mariadb.org/" target="_blank"> <img height="100" src="https://www.vectorlogo.zone/logos/mariadb/mariadb-ar21.svg"></a></code>
 <code><a href="https://www.apache.org/" target="_blank"> <img height="100" src="https://www.vectorlogo.zone/logos/apache/apache-ar21.svg"></a></code>
 
