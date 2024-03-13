@@ -71,8 +71,7 @@
             <li class="nav-item"><a href="/contact" class="contact">CONTACT US</a></li>
         </ul>
     </nav>
-</header>
-  <!-- Flash Messages Section -->
+    <!-- Flash Messages Section -->
      {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <div id="flash-message" class="alert">
@@ -82,6 +81,8 @@
             </div>
         {% endif %}
     {% endwith %}
+</header>
+
 <div id="main">
     <!-- Slideshow container -->
     <div class="slideshow-container">
