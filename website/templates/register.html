@@ -2,9 +2,111 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
+    <title>Register - Gym Booking App</title>
 
+    <style>
+        .background{
+            background-image: url("../static/images/background/register.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body class="background">
+<h1 style="font-family:Audiowide, sans-serif;">Register to <span style="color:yellow">GET</span>Fit</h1>
+
+<div class="w3-row">
+    <!-- Create an Account Form -->
+    <div class="w3-container w3-half">
+        <form method="post" action="{{ request.path }}" class="w3-container w3-margin-top">
+            <h1 style="font-family:Audiowide, sans-serif;">Create an <span style="color:yellow">Acc</span>ount</h1>
+            <label class="label-white">First Name: </label>
+            <input type="text" name="first_name" class="inputText" placeholder="First Name" />
+            <br>
+            <label class="label-white">Last Name: </label>
+            <input type="text" name="last_name" class="inputText" placeholder="Last Name" />
+            <br>
+            <label class="label-white">Email: </label>
+            <input type="email" name="user_email" class="inputText" placeholder="email@gmail.com" />
+            <br>
+            <label class="label-white">Password: </label>
+            <input type="password" name="user_password" class="inputText" placeholder="********" />
+            <br>
+            <input type="hidden" name="role" value="user">
+            <br>
+            <a href="{{ url_for('login') }}" class="backButton w3-left">BACK</a>
+            <input type="submit" value="Register" class="inputSubmit w3-right" />
+        </form>
+    </div>
+    <!-- Active Members Section -->
+    <div class="w3-container w3-half">
+        <div class="w3-container w3-margin-top">
+            <div class="social-links w3-margin">
+                <a><img src="../static/images/icons/user.png" alt="users" class="icon fab" /></a>
+                <span style="color: white;">Members: {{ users_count }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BACK button -->
+<!-- needs to be fixed - when screen is smaller, button is covered by footer -->
+
+<br><br><br><br>
+
+<div class="w3-row info">
+    <div class="w3-container w3-third">
+        <h4 style="font-family:Audiowide, sans-serif;"><b style="color:yellow;">GET</b>FIT</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+
+        <div class="social-links">
+            <a href="https://www.facebook.com"><i class="fab fa-facebook-f"><img class="icon" src="../static/images/icons/facebook.png" alt="Facebook"></i></a>
+            <a href="https://www.twitter.com"><i class="fab fa-twitter"><img class="icon" src="../static/images/icons/twitter.png" alt="Twitter"></i></a>
+            <a href="https://www.instagram.com"><i class="fab fa-instagram"><img class="icon" src="../static/images/icons/instagram.png" alt="Instagram"></i></a>
+        </div>
+    </div>
+
+    <div class="w3-container w3-third">
+        <h4 style="color: yellow">Opening Hours</h4>
+        <div class="w3-center">
+            <div class="opening-hours">
+                <span class="weekdays">
+                    <p>Monday-Friday</p>
+                    <p>Saturday</p>
+                    <p>Sunday</p>
+                    <p>Bank Holidays</p>
+                </span>
+                <span class="times">
+                    <p>9:00 AM - 10:00 PM</p>
+                    <p>09:00 AM - 6:00 PM</p>
+                    <p>CLOSED</p>
+                    <p>11:00 AM - 07:00 PM</p>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-container w3-third">
+        <h4 style="color: yellow">Contact Us</h4>
+        <div class="social-links">
+            <p><a><img class="icon fab" src="../static/images/icons/phone.png" alt="Phone"></a> +123456789</p>
+            <p><a><img class="icon fab" src="../static/images/icons/email.png" alt="Email"></a> gymapp@gymapp.com</p>
+            <p><a><img class="icon fab" src="../static/images/icons/location2.png" alt="Location"></a> 123 Street, City</p>
+        </div>
+    </div>
+    <p style="text-align: center;">© 2024 INFUSE PROJECT. All rights reserved.</p>
+</div>
 </body>
 </html>

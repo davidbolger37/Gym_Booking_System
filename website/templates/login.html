@@ -2,10 +2,191 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title = "Hello!"</title>
-    <link href="{{ url_for('.static', filename='css/style.css') }}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="../static/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
+    <title>Login - Gym Booking App</title>
+
+    <!-- Add background image -->
+    <style>
+        .background{
+            background-image: url("../static/images/background/login.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            align-items: center;
+            height: 90vh;
+            margin: 0;
+        }
+
+        /*flash messages*/
+
+.alert {
+    position: relative;
+    left:50%;
+    transform: translateX(-50%);
+    z-index: 1000; /* Make sure it's above other elements */
+    background-color:black;
+    color:yellow;
+    text-align:center;
+    width:100%;
+    padding:10px;
+    font-size:20px;
+    margin-bottom:20px;
+}
+
+/* Keyframes for the fade-out effect */
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Initially the message is fully visible */
+#flash-message {
+    animation-name: stayVisible;
+    animation-duration: 4s; /* Adjust the time for how long it stays */
+}
+
+/* After 4s, fade out the message in 1s */
+#flash-message.fade-out {
+    animation-name: fadeOut;
+    animation-duration: 1s;
+    animation-fill-mode: forwards; /* Keeps the element in the state of the last keyframe */
+    animation-delay: 3s; /* Adjust the delay to match how long the message stays */
+}
+
+/* To keep the message visible before it fades out */
+@keyframes stayVisible {
+    from { opacity: 1; }
+    to { opacity: 1; }
+}
+
+    </style>
+
+    <script>
+    {% if success_message %}
+        alert("{{ success_message }}");
+    {% endif %}
+</script>
 </head>
-<body>
+
+<body class="background">
+<h1 style="font-family:Audiowide, sans-serif;"><span style="color:yellow">GET</span>Fit</h1>
+<!-- Flash Messages Section -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div id="flash-message" class="alert">
+    {% for category, message in messages %}
+    <div class="{{ category }}">{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+<!--
+UNCOMMEND IF WE WANT TO INTRODUCE FLASH MESSAGES.
+PROBABLY USING ALERTS WOULD BE BETTER
+{%- for message in get_flashed_messages(with_categories = true) %}
+<div class="alert alert-danger">
+    {{ message }}
+</div>
+{%- endfor %}
+-->
+<div class="login-container">
+    <div class="w3-half w3-card w3-margin card">
+        <h3 style="font-family:Audiowide, sans-serif;">Log In</h3>
+        <form method="post" action="{{ url_for('login') }}" class="w3-margin">
+            <label class="label-white">Email: </label>
+            <input type="text" name="user_email" class="inputText"/>
+            <br>
+            <label class="label-white">Password</label>
+            <input type="password" name="user_password" class="inputText"/>
+            <br>
+            <input type="submit" name="Login" value="Login" class="w3-right inputSubmit"/>
+        </form>
+    </div>
+
+    <div class="w3-half w3-card w3-margin card">
+        <h3 style="font-family:Audiowide, sans-serif;"><span style="color: yellow">Not</span> a Member Yet?</h3>
+        <form method="get" action="{{ url_for('register') }}" class="w3-margin">
+            <input type="submit" name="Register" value="Register" class="w3-right inputSubmit"/>
+        </form>
+    </div>
+</div>
+<br><br><br><br>
+<!-- Footer -->
+<div class="w3-row info">
+    <div class="w3-container w3-third">
+        <h4 style="font-family:Audiowide, sans-serif;"><b style="color:yellow;">GET</b>FIT</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+
+        <div class="social-links">
+            <a href="https://www.facebook.com"><i class="fab fa-facebook-f"><img class="icon" src="../static/images/icons/facebook.png" alt="Facebook"></i></a>
+            <a href="https://www.twitter.com"><i class="fab fa-twitter"><img class="icon" src="../static/images/icons/twitter.png" alt="Twitter"></i></a>
+            <a href="https://www.instagram.com"><i class="fab fa-instagram"><img class="icon" src="../static/images/icons/instagram.png" alt="Instagram"></i></a>
+        </div>
+    </div>
+
+    <div class="w3-container w3-third">
+        <h4 style="color: yellow">Opening Hours</h4>
+        <div class="w3-center">
+            <div class="opening-hours">
+                <span class="weekdays">
+                    <p>Monday-Friday</p>
+                    <p>Saturday</p>
+                    <p>Sunday</p>
+                    <p>Bank Holidays</p>
+                </span>
+                <span class="times">
+                    <p>9:00 AM - 10:00 PM</p>
+                    <p>09:00 AM - 6:00 PM</p>
+                    <p>CLOSED</p>
+                    <p>11:00 AM - 07:00 PM</p>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-container w3-third">
+        <h4 style="color: yellow">Contact Us</h4>
+        <div class="social-links">
+            <p><a><img class="icon fab" src="../static/images/icons/phone.png" alt="Phone"></a> +123456789</p>
+            <p><a><img class="icon fab" src="../static/images/icons/email.png" alt="Email"></a> gymapp@gymapp.com</p>
+            <p><a><img class="icon fab" src="../static/images/icons/location2.png" alt="Location"></a> 123 Street, City</p>
+        </div>
+    </div>
+    <p style="text-align: center;">© 2024 INFUSE PROJECT. All rights reserved.</p>
+</div>
+<!-- display alerts -->
+{% if alert %}
+<script>
+    // User exists error
+    {% if alert_type == 'info' %}
+    alert("{{ alert }}");
+    // Authentication error
+    {% elif alert_type == 'error' %}
+    alert("{{ alert }}");
+    {% endif %}
+</script>
+{% endif %}
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const flashMessage = document.getElementById('flash-message');
+        if (flashMessage) {
+            setTimeout(() => {
+                flashMessage.classList.add('fade-out');
+            }, 4000); // 4000ms or 4 seconds until fade-out starts
+        }
+    });
+</script>
 
 </body>
 </html>

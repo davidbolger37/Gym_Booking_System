@@ -1,0 +1,666 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ body {
+          font-family: "Audiowide", sans-serif;
+        }
+
+/* Navigation Bar */
+.navbar {
+    background-color: #070712;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    padding-right: 150px;
+}
+
+.navbar-nav {
+    list-style-type: none;
+    display: flex;
+}
+
+.nav-item {
+    padding: 20px;
+}
+
+.nav-item a {
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.nav-item a.active {
+    color: yellow;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.nav-item a:hover,
+.nav-item a:focus {
+    text-decoration: none;
+    color:yellow
+}
+
+.contact {
+    border: 2px solid white;
+    padding: 5px 10px;
+}
+.nav-item{
+    .contact:hover {
+      border: 2px solid  yellow;
+        background-color:  yellow;
+        color: black;
+    }
+}
+
+/*flash messages*/
+
+.alert {
+    position: fixed;
+    left:50%;
+    transform: translateX(-50%);
+    z-index: 1000; /* Make sure it's above other elements */
+    background-color:black;
+    color:yellow;
+    text-align:center;
+    width:100%;
+    padding:10px;
+    font-size:20px;
+}
+
+/* Keyframes for the fade-out effect */
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Initially the message is fully visible */
+#flash-message {
+    animation-name: stayVisible;
+    animation-duration: 4s; /* Adjust the time for how long it stays */
+}
+
+/* After 4s, fade out the message in 1s */
+#flash-message.fade-out {
+    animation-name: fadeOut;
+    animation-duration: 1s;
+    animation-fill-mode: forwards; /* Keeps the element in the state of the last keyframe */
+    animation-delay: 3s; /* Adjust the delay to match how long the message stays */
+}
+
+/* To keep the message visible before it fades out */
+@keyframes stayVisible {
+    from { opacity: 1; }
+    to { opacity: 1; }
+}
+
+
+/*sidebar*/
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  z-index: 11;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: yellow;
+}
+
+.sidebar a.active{
+  color: yellow;
+}
+
+.sidebar .sidebarText{
+  font-size: 15px;
+   font-weight: 400;
+   line-height: 24px;
+   color: #fff;
+   padding: 8px 8px 8px 32px;
+}
+
+.sidebar .sidebarText:hover{
+color: yellow;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 30px;
+  cursor: pointer;
+  background-color: yellow;
+  color: black;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color:#EEDC5B ;
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index:10;
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 102px;
+}
+
+/*SlideShow Section*/
+
+/* Slideshow container */
+.slideshow-container {
+  display:block;
+  position: relative;
+   z-index: 1;
+   height:700px;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 40px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: black;
+  font-size: 25px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 30px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+  z-index:3;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.dot .active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+/* Container holding the image and the text */
+.container {
+  position: relative;
+  font-family: Arial;
+}
+
+/* Bottom right text */
+.text-block {
+      position: absolute;
+    bottom: 200px;
+    right: 0px;
+    background-color:rgba(0,0,0,0.8);
+    color: white;
+    padding: 30px;
+    width: 500px;
+    height: 250px;
+}
+
+.readMore {
+  background-color: yellow;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+/*About Us Section*/
+
+.about{
+  background-color:black;
+  color:white;
+  width:100%;
+  height:600px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px;
+}
+
+.about .content {
+  max-width: 50%;
+  font-family: Arial
+}
+
+.image-container {
+  position: relative;
+  max-width: 50%;
+}
+
+.image-container::before,
+.image-container::after {
+  content: '';
+  position: absolute;
+  border: 10px solid yellow; /* the color of the border */
+  border-radius: 5px; /* rounded corners */
+}
+
+.image-container::before {
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+}
+
+.image-container::after {
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+}
+
+.image-container img {
+  width: 100%;
+  display: block; /* remove bottom space */
+  height: auto;
+}
+
+.contact-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: yellow; /* the color of your button */
+  color: black; /* text color */
+  text-decoration: none; /* remove underline from link */
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+}
+
+.contact-btn:hover {
+  background-color: white; /* darker shade of orange for hover effect */
+}
+
+/*Our Team Section*/
+
+.ourTeam {
+  background-color: #212225;
+  width: 100%;
+  height:600px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  padding-top: 50px;
+}
+
+.ourTeam .column {
+  width: 25%;
+  height:500px;
+  padding: 0 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ourTeam .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  background-color:#1d1e20;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.ourTeam .card:hover{
+background-color:yellow;
+}
+
+.ourTeam .card:hover h2,
+.ourTeam .card:hover .title,
+.ourTeam .card:hover p
+{
+  color: black;
+}
+
+
+.ourTeam img {
+  width: 100%;
+  display: block;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+}
+
+
+.ourTeam .card img {
+  height: 300px;
+}
+
+.ourTeam .container {
+  padding: 0 16px;
+  text-align:center;
+  color:white;
+}
+
+.ourTeam .title {
+  color: grey;
+}
+
+.ourTeam .button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  font-size:18px;
+  background-color: grey;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  margin-top:20px;
+  margin-bottom:20px;
+}
+
+.ourTeam .button:hover {
+  background-color: black;
+  color:yellow;
+}
+
+/*Our Courses Section*/
+.ourCourses {
+  background-color:#1d1e20;
+  width: 100%;
+  height:600px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+}
+
+
+.ourCourses .row{
+  width: 100%;
+  height:250px;
+  padding:20px;
+  display: flex;
+  flex-direction:row;
+}
+
+.ourCourses .column {
+  width: 33.3%;
+  height:230px;
+  padding: 4px 8px 4px 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ourCourses .card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color:#242728;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.ourCourses .card:hover{
+background-color:yellow;
+}
+
+.ourCourses .card:hover h2,
+.ourCourses .card:hover p
+{
+  color: black;
+}
+
+.ourCourses .card:hover i{
+  font-size:100px;
+  color:black;
+  padding-bottom:20px;
+}
+
+.ourCourses .container {
+  padding: 0 16px;
+  text-align:center;
+  color:white;
+}
+
+.ourCourses i{
+  text-align:center;
+  font-size:70px;
+  padding-top:30px;
+  padding-bottom:40px;
+  color:yellow;
+}
+
+/*Footer Section*/
+
+
+ .footer .container{
+	max-width: 1170px;
+	margin:auto;
+}
+.footer .row{
+	display: flex;
+	flex-wrap: wrap;
+}
+.footer ul{
+	list-style: none;
+}
+.footer{
+	background-color: black;
+    padding: 70px 0;
+}
+.footer-col{
+   width: 25%;
+   padding: 0 15px;
+}
+.footer-col h4{
+	font-size: 18px;
+	color: yellow;
+	text-transform: capitalize;
+	margin-bottom: 35px;
+	font-weight: 500;
+	position: relative;
+}
+.footer-col h4::before{
+	content: '';
+	position: absolute;
+	left:0;
+	bottom: -10px;
+	background-color: white;
+	height: 2px;
+	box-sizing: border-box;
+	width: 50px;
+}
+.footer-col ul li:not(:last-child){
+	margin-bottom: 10px;
+}
+.footer-col ul li a{
+	font-size: 16px;
+	text-transform: capitalize;
+	color: white;
+	text-decoration: none;
+	font-weight: 300;
+	color: #bbbbbb;
+	display: block;
+	transition: all 0.3s ease;
+}
+.footer-col ul li a:hover{
+	color: yellow;
+	padding-left: 8px;
+}
+.footer-col .social-links a{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	background-color: rgba(255,255,255,0.2);
+	margin:0 10px 10px 0;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 50%;
+	color: white;
+	transition: all 0.5s ease;
+}
+.footer-col .social-links a:hover{
+	color: black;
+	background-color: yellow;
+}
+
+
+/*Responsive*/
+@media(max-width: 767px){
+  .footer-col{
+    width: 50%;
+    margin-bottom: 30px;
+}
+
+}
+@media(max-width: 574px){
+  .footer-col{
+    width: 100%;
+}
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+
+/* For Mobile Screens */
+@media screen and (max-width: 768px) {
+    .navbar-brand, .navbar-nav {
+        display: none;
+    }
+    .openbtn {
+        display: block;
+    }
+}
+
+/* For Desktop Screens */
+@media screen and (min-width: 769px) {
+    .navbar-nav {
+        display: flex;
+    }
+
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .about-section {
+    flex-direction: column;
+  }
+
+  .content,
+  .image-container {
+    max-width: 100%;
+  }
+
+  .image-container::before,
+  .image-container::after {
+    display: none; /* Hide the borders on smaller screens */
+  }
+}
+
+
+/* Responsive adjustments */
+@media screen and (max-width: 650px) {
+  .ourTeam .column {
+    width: 100%; /* Full width on smaller screens */
+    margin-bottom: 16px; /* Add some space between cards */
+  }
+
+  .ourTeam .card img {
+    height: auto; /* Adjust height to be auto on smaller screens */
+  }
+}

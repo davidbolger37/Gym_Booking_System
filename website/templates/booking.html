@@ -2,10 +2,375 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title = "Hello!"</title>
-    <link href="{{ url_for('.static', filename='css/style.css') }}" rel="stylesheet">
-</head>
-<body>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/booking.css">
+    <script>
+    </script>
+    <style>
+        .center {
+          margin: 0;
+          position: absolute;
+          top: 70%;
+          left: 50%;
+          -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+        }
 
+        /*flash messages*/
+
+     .alert {
+    position: relative;
+    left:50%;
+    transform: translateX(-50%);
+    z-index: 1000; /* Make sure it's above other elements */
+    background-color:black;
+    color:yellow;
+    text-align:center;
+    width:100%;
+    padding:10px;
+    font-size:20px;
+}
+
+/* Keyframes for the fade-out effect */
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Initially the message is fully visible */
+#flash-message {
+    animation-name: stayVisible;
+    animation-duration: 4s; /* Adjust the time for how long it stays */
+}
+
+/* After 4s, fade out the message in 1s */
+#flash-message.fade-out {
+    animation-name: fadeOut;
+    animation-duration: 1s;
+    animation-fill-mode: forwards; /* Keeps the element in the state of the last keyframe */
+    animation-delay: 3s; /* Adjust the delay to match how long the message stays */
+}
+
+/* To keep the message visible before it fades out */
+@keyframes stayVisible {
+    from { opacity: 1; }
+    to { opacity: 1; }
+}
+
+    </style>
+</head>
+<body style="background-color: #1F2626;">
+<div class="main-wrapper">
+    <section>
+        <div>
+            <div>
+                <div>
+                    <div>
+                        <h1 style="text-align: center; color: white;">Bookings </h1>
+                    </div>
+                    <!-- Flash Messages Section -->
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    <div id="flash-message" class="alert">
+                        {% for category, message in messages %}
+                        <div class="{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+                    <div id="div1"
+                         style="opacity: 1; color: white;background-image: url(../static/images/background/bookingBack.jpg); height: 100%; width: 100%;">
+                        <br><br><br>
+                        <h2>Below is a Schedule for each day in the Gym</h2>
+                        <p>Click a day to see its schedule or scroll to find something that suits
+                            you</p>
+                        <p>Click the Book button to book a timeslot or class</p>
+                        <br><br><br><br><br>
+                    </div>
+                    <div>
+                        <div class="w3-container" style="margin: 0; position: absolute;top: 63%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+                            <button id="showMonday" style="background-color: #1F2626; color: #FFBF00"><a href="#monday">Monday</a>
+                            </button>
+                            <button id="showTuesday" style="background-color: #1F2626; color: #FFBF00"><a
+                                    href="#tuesday">Tuesday</a></button>
+                            <button id="showWednesday" style="background-color: #1F2626; color: #FFBF00"><a
+                                    href="#wednesday">Wednesday</a></button>
+                            <button id="showThursday" style="background-color: #1F2626; color: #FFBF00"><a
+                                    href="#thursday">Thursday</a></button>
+                            <button id="showFriday" style="background-color: #1F2626; color: #FFBF00"><a href="#friday">Friday</a>
+                            </button>
+                            <button id="showSaturday" style="background-color: #1F2626; color: #FFBF00"><a
+                                    href="#saturday">Saturday</a></button>
+                        </div>
+                        <div class="center">
+                            {% if user_role == 'admin' %}
+                            <div class="create-class-button">
+                                <button onclick="window.location.href='{{ url_for('create_class') }}'"
+                                        style="background-color: #FFBF00; color: black;">Create Class
+                                </button>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <!--									<div id="monday">-->
+                        <!--                                        <h2 style="color: white; text-align: center;">Monday</h2>-->
+                        <!--										<div class="w3-container" style="width: 60%; margin: 0 auto;">-->
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>09.00 AM - 11.00 AM </b></p><b>Yoga</b>(Rob Smith)    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>11.00 AM - 12.00 PM </b></p><b>Gym </b>    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>12.00 PM - 02.00 PM </b></p><b>Gym </b>     - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>04.00 PM - 06.00 PM </b></p><b>Gym </b>     - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>06.00 PM - 07.00 PM </b></p><b>Aerobics</b>(John Doe)   - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>07.00 PM - 09.00 PM </b></p><b>Gym </b>    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--										</div>-->
+                        <!--									<div id="tuesday">-->
+                        <!--                                        <h2 style="color: white; text-align: center;">Tuesday</h2>-->
+                        <!--										<div class="w3-container" style="width: 60%; margin: 0 auto;">-->
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>09.00 AM - 11.00 AM </b></p><b>Gym </b>   - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>11.00 AM - 12.00 PM </b></p><b>Gym </b>    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>12.00 PM - 02.00 PM </b></p><b>Gym </b>     - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>04.00 PM - 06.00 PM </b></p><b>Spinning</b>(Kazi Fahim)    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>06.00 PM - 07.00 PM </b></p><b>Gym </b>    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>07.00 PM - 09.00 PM </b></p><b>Gym </b>    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--										</div>-->
+                        <!--									</div>-->
+                        <!--									<div id="wednesday">-->
+                        <!--                                        <h2 style="color: white; text-align: center;">Wednesday</h2>-->
+                        <!--										<div class="w3-container" style="width: 60%; margin: 0 auto;">-->
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>09.00 AM - 11.00 AM </b></p><b>Gym </b>    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>11.00 AM - 12.00 PM </b></p><b>Gym </b>   - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>12.00 PM - 02.00 PM </b></p><b>Zumba</b>(Jessy Reo)    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>04.00 PM - 06.00 PM </b></p><b>Gym </b>    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>06.00 PM - 07.00 PM </b></p><b>Pilates</b>(John Doe)  - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>07.00 PM - 09.00 PM </b></p><b>Yoga</b>(Zahra Sharif)   - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--										</div>-->
+                        <!--									</div>-->
+                        <!--									<div id="thursday">-->
+                        <!--                                        <h2 style="color: white; text-align: center;">Thursday</h2>-->
+                        <!--										<div class="w3-container" style="width: 60%; margin: 0 auto;">-->
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>09.00 AM - 11.00 AM </b></p><b>Gym </b>    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>11.00 AM - 12.00 PM </b></p><b>Gym </b>    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>12.00 PM - 02.00 PM </b></p><b>Boxing</b>(Michael Smith)    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>04.00 PM - 06.00 PM </b></p><b>Gym </b>    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>06.00 PM - 07.00 PM </b></p><b>Gym </b>    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>07.00 PM - 09.00 PM </b></p><b>Yoga</b>(Zahra Sharif)   - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--										</div>-->
+                        <!--									</div>-->
+                        <!--									<div id="friday">-->
+                        <!--                                        <h2 style="color: white; text-align: center;">Friday</h2>-->
+                        <!--										<div class="w3-container" style="width: 60%; margin: 0 auto;">-->
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>09.00 AM - 11.00 AM</b></p><b>Gym </b>    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>11.00 AM - 12.00 PM </b></p><b>Gym </b>   - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>12.00 PM - 02.00 PM </b></p><b>Gym </b>    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>04.00 PM - 06.00 PM </b></p><b>CrossFit</b>(Kazi Fahim)    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>06.00 PM - 07.00 PM </b></p><b>Pilates</b>(John Doe)  - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>07.00 PM - 09.00 PM </b></p><b>Gym </b>    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+                        <!--										</div>-->
+                        <!--									</div>-->
+                        <!--									<div id="saturday">-->
+                        <!--                                        <h2 style="color: white; text-align: center;">Saturday</h2>-->
+                        <!--										<div class="w3-container" style="width: 60%; margin: 0 auto;">-->
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>09.00 AM - 11.00 AM </b></p><b>Gym </b>   - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>11.00 AM - 12.00 PM </b></p><b>Gym </b>    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>12.00 PM - 02.00 PM </b></p><b>Gym </b>     - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>04.00 PM - 06.00 PM </b></p><b>Gym </b>    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>06.00 PM - 07.00 PM </b></p><b>Gym </b>    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+
+                        <!--											<div class="w3-panel w3-card w3-amber"><p style="text-align: left;"><b>07.00 PM - 09.00 PM </b></p><b>Gym </b>    - -->
+                        <!--												<button type="button" style="background-color: #1F2626; color: white;">BOOK</button>-->
+                        <!--												<button style="background-color: red; color: white;" hidden>Delete</button>-->
+                        <!--												<button style="background-color: white; color: black;" hidden>Edit</button></div>-->
+                        <!--										</div>-->
+                        <!--										</div>-->
+                        <!--									</div>-->
+                        <div style="margin-top: 8%; ">
+                            {% for day, classes in classes_by_day.items() %}
+                            <div id="{{ day.lower() }}">
+                                <h2 style="color: white; text-align: center; text-transform: uppercase;">{{ day }}</h2>
+                                <div class="w3-container" style="width: 60%; margin: 0 auto; ">
+                                    {% for class in classes %}
+                                    <div class="w3-panel w3-card w3-amber"
+                                         style="display:flex; justify-content:space-between; align-items:center;">
+                                        <p style="text-align: left;"><b>{{ class.time_duration }} </b></p>
+                                        <b>{{ class.class_name }}</b>-
+                                        <div class="buttons" style="display:flex;">
+                                            <button type="button"
+                                                    style="background-color: #1F2626; color: white;margin:5px;">BOOK
+                                            </button>
+                                            {% if user_role == 'admin' %}
+                                            <button onclick="window.location.href='{{ url_for('update_class', class_id=class.id) }}'"
+                                                    style="background-color: #1F2626;border: 2px solid white; color: white;margin:5px;">
+                                                Edit
+                                            </button>
+                                            <form action="{{ url_for('delete_class', class_id=class.id) }}"
+                                                  method="post"
+                                                  onsubmit="return confirm('Are you sure you want to delete this class?');">
+                                                <button type="submit"
+                                                        style="background-color: #1F2626; border: 2px solid white; color: white;margin:5px;">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script>
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const flashMessage = document.getElementById('flash-message');
+        if (flashMessage) {
+            setTimeout(() => {
+                flashMessage.classList.add('fade-out');
+            }, 4000); // 4000ms or 4 seconds until fade-out starts
+        }
+    });
+</script>
 </body>
 </html>
