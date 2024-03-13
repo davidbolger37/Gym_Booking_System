@@ -1,7 +1,7 @@
 from flask import Flask, request, flash, url_for, redirect, session, render_template, render_template_string
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy import Enum
+from sqlalchemy import Enum, case
 
 USERNAME = 'root'
 PASSWORD = ''
@@ -171,13 +171,29 @@ def booking():
     if 'user_id' in session:
         user = User.query.get(session['user_id'])
         user_role = user.role
-    # Fetch all classes and sort them by day
-    classes = Class.query.all()
+
+    # Define an ordering for the days of the week
+    day_ordering = case(
+        value=Class.day,
+        whens={
+            'Monday': 1,
+            'Tuesday': 2,
+            'Wednesday': 3,
+            'Thursday': 4,
+            'Friday': 5,
+            'Saturday': 6,
+        },
+    )
+
+    # Fetch all classes and order them first by day, then by time_duration
+    classes = Class.query.order_by(day_ordering, Class.time_duration).all()
+
     classes_by_day = {}
     for class_ in classes:
         if class_.day not in classes_by_day:
             classes_by_day[class_.day] = []
         classes_by_day[class_.day].append(class_)
+
     return render_template('booking.html', user_role=user_role, classes_by_day=classes_by_day)
 
 
