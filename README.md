@@ -40,7 +40,7 @@ GETFIT is an online booking system specifically designed for gym members to sche
 - **Clone the repository**:
   
   ```
-  git clone <repo-url>
+  git clone https://github.com/davidbolger37/Gym_Booking_System.git
   ```
   
 - **Install dependencies**:
