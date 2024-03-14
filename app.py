@@ -63,15 +63,19 @@ class Booking(db.Model):
     # Additional columns to store email and class names
     user_email = db.Column(db.String(255), nullable=False)
     class_name = db.Column(db.String(40), nullable=False)
+    day = db.Column(db.String(15), nullable=False)
+    time_duration = db.Column(db.String(40), nullable=False)
 
     user = db.relationship('User', back_populates='bookings')
     class_ = db.relationship('Class', back_populates='bookings')
 
-    def __init__(self, user_id, class_id, user_email, class_name):
+    def __init__(self, user_id, class_id, user_email, class_name, day, time_duration):
         self.user_id = user_id
         self.class_id = class_id
         self.user_email = user_email
         self.class_name = class_name
+        self.day = day
+        self.time_duration = time_duration
 
 
 ###################################################
@@ -262,7 +266,17 @@ def update_class(class_id):
             flash('A class with the same name, day, and time already exists.', 'error')
             return redirect(url_for('update_class', class_id=class_id))
 
-        # Update the Class instance if it already doesn't exist
+        # Delete associated bookings for the class being updated
+        try:
+            bookings_to_delete = Booking.query.filter_by(class_id=class_id).all()
+            for booking in bookings_to_delete:
+                db.session.delete(booking)
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            flash('An error occurred while deleting associated bookings.', 'error')
+
+        # Update the Class instance
         try:
             class_to_update.class_name = class_name
             class_to_update.day = day
@@ -324,9 +338,12 @@ def book_class(class_id):
 
     # Retrieve the class name
     class_name = class_to_book.class_name
+    day = class_to_book.day
+    time_duration = class_to_book.time_duration
 
     # Create a new booking
-    new_booking = Booking(user_id=user.id, class_id=class_id, user_email=user.user_email, class_name=class_name)
+    new_booking = Booking(user_id=user.id, class_id=class_id, user_email=user.user_email, class_name=class_name,
+                          day=day, time_duration=time_duration)
 
     try:
         db.session.add(new_booking)
@@ -340,6 +357,4 @@ def book_class(class_id):
 
 
 if __name__ == '__main__':
-    #create_tables()
-    #add_initial_data()
     app.run(debug=True)
