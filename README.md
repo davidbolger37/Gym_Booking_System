@@ -52,10 +52,10 @@ GETFIT is an online booking system specifically designed for gym members to sche
 - **Database Setup**:
   
 >[!NOTE]
->Start XAMPP and ensure that your Apache and MySQL services are running.
+>Start XAMPP and ensure that your Apache and MySQL services are running.<br>
 
-- **Create a new database** named gym (or your chosen name) in phpMyAdmin or via the command line.
-- **Import initial data/schema** provided in the repository.<br>
+**- Create a new database** named gym (or your chosen name) in phpMyAdmin or via the command line.<br>
+**- Import initial data/schema** provided in the repository.<br>
 
 >[!IMPORTANT]
 >In you Flask app ensure you adjust the connection parameters('USERNAME', 'PASSWORD', 'HOST', 'DB_NAME') to match your MySQL setup in XAMPP.
@@ -72,10 +72,10 @@ GETFIT is an online booking system specifically designed for gym members to sche
 ## Contributors
 
 - **Raveena Rathnam** [![Button 1](https://img.shields.io/badge/%22RaveenaRathnam%22-green.svg)](https://github.com/RaveenaRathnam)
-- **Kian Daly** [![Button 1](https://img.shields.io/badge/%22KianDaly%22-green.svg)](https://github.com/KianDaly)
-- **David Bolger** [![Button 1](https://img.shields.io/badge/%22davidbolger37%22-green.svg)](https://github.com/davidbolger37)
-- **Michelle Hynds** [![Button 1](https://img.shields.io/badge/%22newAccMH%22-green.svg)](https://github.com/newAccMH)
-- **Natalia Palej** [![Button 1](https://img.shields.io/badge/%22NataliaPalej%22-green.svg)](https://github.com/NataliaPalej)
+- **Kian Daly** [![Button 1](https://img.shields.io/badge/%22KianDaly%22-blue.svg)](https://github.com/KianDaly)
+- **David Bolger** [![Button 1](https://img.shields.io/badge/%22davidbolger37%22-yellow.svg)](https://github.com/davidbolger37)
+- **Michelle Hynds** [![Button 1](https://img.shields.io/badge/%22newAccMH%22-red.svg)](https://github.com/newAccMH)
+- **Natalia Palej** [![Button 1](https://img.shields.io/badge/%22NataliaPalej%22-violet.svg)](https://github.com/NataliaPalej)
  
 
   
