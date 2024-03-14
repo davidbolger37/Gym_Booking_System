@@ -42,6 +42,12 @@ body {
   }
 }
 
+#container{
+    display: flex;
+    flex-direction: row; /* or row, depending on your layout */
+    justify-content: center;
+    align-items: center;
+}
 
 #div1 {
     color: white;

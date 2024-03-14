@@ -9,12 +9,23 @@
     </script>
     <style>
         .center {
-          margin: 0;
-          position: absolute;
-          top: 70%;
-          left: 50%;
-          -ms-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center; /* Horizontal centering */
+            align-items: center; /* Vertical centering */
+            margin-top: 20px; /* Adjust as needed */
+        }
+
+        .create-class-button {
+            margin-bottom: 20px; /* Adjust as needed */
+        }
+
+        .create-class-button button {
+            background-color: #FFBF00;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
         }
 
         /*flash messages*/
@@ -89,7 +100,7 @@
                         <br><br><br><br><br>
                     </div>
                     <div>
-                        <div class="w3-container" style="margin: 0; position: absolute;top: 63%;left: 50%;-ms-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">
+                        <div class="w3-container" id="container">
                             <button id="showMonday" style="background-color: #1F2626; color: #FFBF00"><a href="#monday">Monday</a>
                             </button>
                             <button id="showTuesday" style="background-color: #1F2626; color: #FFBF00"><a
@@ -107,7 +118,7 @@
                             {% if user_role == 'admin' %}
                             <div class="create-class-button">
                                 <button onclick="window.location.href='{{ url_for('create_class') }}'"
-                                        style="background-color: #FFBF00; color: black;">Create Class
+                                        >Create Class
                                 </button>
                             </div>
                             {% endif %}
@@ -320,7 +331,7 @@
                         <!--										</div>-->
                         <!--										</div>-->
                         <!--									</div>-->
-                        <div style="margin-top: 8%; ">
+                        <div style="margin-top: 4%; ">
                             {% for day, classes in classes_by_day.items() %}
                             <div id="{{ day.lower() }}">
                                 <h2 style="color: white; text-align: center; text-transform: uppercase;">{{ day }}</h2>
