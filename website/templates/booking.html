@@ -342,9 +342,14 @@
                                         <p style="text-align: left;"><b>{{ class.time_duration }} </b></p>
                                         <b>{{ class.class_name }}</b>-
                                         <div class="buttons" style="display:flex;">
-                                            <button type="button"
-                                                    style="background-color: #1F2626; color: white;margin:5px;">BOOK
-                                            </button>
+                                            <form action="{{ url_for('book_class', class_id=class.id) }}"
+                                                  method="post"
+                                                  onsubmit="return confirm('Are you sure you want to book this class?');">
+                                                <button type="submit"
+                                                        style="background-color: #1F2626; border: 2px solid white; color: white;margin:5px;">
+                                                    Book
+                                                </button>
+                                            </form>
                                             {% if user_role == 'admin' %}
                                             <button onclick="window.location.href='{{ url_for('update_class', class_id=class.id) }}'"
                                                     style="background-color: #1F2626;border: 2px solid white; color: white;margin:5px;">

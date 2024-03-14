@@ -22,6 +22,8 @@ CREATE TABLE IF NOT EXISTS booking (
     user_id INT NOT NULL,
     class_id INT NOT NULL,
     booking_at TIMESTAMP,
+    user_email VARCHAR(255) NOT NULL,
+    class_name VARCHAR(40) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (class_id) REFERENCES class(id) ON DELETE CASCADE
 );
@@ -39,9 +41,9 @@ INSERT INTO class (class_name, day, time_duration) VALUES
 ('Pilates', 'Friday', '9:00 AM - 10:00 AM');
 
 -- Populate the 'booking' table
-INSERT INTO booking (user_id, class_id, booking_at) VALUES
-(1, 1, NOW()),
-(2, 2, NOW()),
-(3, 3, NOW());
+INSERT INTO booking (user_id, class_id, user_email, class_name, booking_at) VALUES
+(1, 1, 'john@example.com', 'Yoga', NOW()),
+(2, 2, 'jane@example.com', 'Zumba', NOW()),
+(3, 3, 'alice@example.com', 'Pilates', NOW());
 
 

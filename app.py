@@ -2,6 +2,7 @@ from flask import Flask, request, flash, url_for, redirect, session, render_temp
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import Enum, case
+from datetime import datetime
 
 USERNAME = 'root'
 PASSWORD = ''
@@ -24,7 +25,7 @@ class User(db.Model):
     user_email = db.Column(db.String(255), unique=True, nullable=False)
     user_password = db.Column(db.String(255), nullable=False)
     role = db.Column(Enum('user', 'admin'), nullable=False)
-    bookings = db.relationship('Booking', back_populates='user')
+    bookings = db.relationship('Booking', back_populates='user', cascade="all, delete-orphan")
 
     def __init__(self, first_name, last_name, user_email, user_password, role):
         self.first_name = first_name
@@ -44,7 +45,7 @@ class Class(db.Model):
     class_name = db.Column(db.String(40), nullable=False)
     day = db.Column(db.String(15), nullable=False)
     time_duration = db.Column(db.String(40), nullable=False)
-    bookings = db.relationship('Booking', back_populates='class_')
+    bookings = db.relationship('Booking', back_populates='class_', cascade="all, delete-orphan")
 
     def __init__(self, class_name, day, time_duration):
         self.class_name = class_name
@@ -55,23 +56,28 @@ class Class(db.Model):
 class Booking(db.Model):
     __tablename__ = 'booking'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    class_id = db.Column(db.Integer, db.ForeignKey('class.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
+    class_id = db.Column(db.Integer, db.ForeignKey('class.id', ondelete='CASCADE'), nullable=False)
     booking_at = db.Column(db.DateTime(timezone=True), default=db.func.now())
+
+    # Additional columns to store email and class names
+    user_email = db.Column(db.String(255), nullable=False)
+    class_name = db.Column(db.String(40), nullable=False)
+
     user = db.relationship('User', back_populates='bookings')
     class_ = db.relationship('Class', back_populates='bookings')
 
-    def __init__(self, user_id, class_id):
+    def __init__(self, user_id, class_id, user_email, class_name):
         self.user_id = user_id
         self.class_id = class_id
+        self.user_email = user_email
+        self.class_name = class_name
 
 
 ###################################################
 #                    ROUTES                       #
 ###################################################
-# @app.route('/')
-# def hello():
-#     return 'Hello!'
+
 
 @app.route('/')
 def index():
@@ -286,11 +292,49 @@ def delete_class(class_id):
         try:
             db.session.commit()
             flash('Class has been deleted successfully!', 'success')
-        except:
+        except Exception as e:
             db.session.rollback()  # Roll back the changes if something goes wrong
             flash('An error occurred while deleting the class.', 'error')
     else:
         flash('Class doesn\'t exist', 'error')
+
+    return redirect(url_for('booking'))
+
+
+@app.route('/book-class/<int:class_id>', methods=['POST'])
+def book_class(class_id):
+    if 'user_id' not in session:
+        flash('You need to log in to book a class.', 'error')
+        return redirect(url_for('login'))
+
+    # Retrieve the logged-in user
+    user = User.query.get(session['user_id'])
+
+    # Check if the class exists
+    class_to_book = Class.query.get(class_id)
+    if not class_to_book:
+        flash('Class not found.', 'error')
+        return redirect(url_for('booking'))
+
+    # Check if the user is already booked for this class
+    existing_booking = Booking.query.filter_by(user_id=user.id, class_id=class_id).first()
+    if existing_booking:
+        flash('You have already booked this class.', 'info')
+        return redirect(url_for('booking'))
+
+    # Retrieve the class name
+    class_name = class_to_book.class_name
+
+    # Create a new booking
+    new_booking = Booking(user_id=user.id, class_id=class_id, user_email=user.user_email, class_name=class_name)
+
+    try:
+        db.session.add(new_booking)
+        db.session.commit()
+        flash('Class booked successfully!', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash('An error occurred while booking the class.', 'error')
 
     return redirect(url_for('booking'))
 
