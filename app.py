@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import Enum, case
 from datetime import datetime
+import re
 
 USERNAME = 'root'
 PASSWORD = ''
@@ -220,6 +221,14 @@ def create_class():
         day = request.form.get('day')
         time_duration = request.form.get('time_duration')
 
+        # Regex pattern for matching "11:00 AM - 12:00 PM" format
+        pattern = r'^(?:1[0-2]|0?[1-9]):[0-5][0-9] [AP]M - (?:1[0-2]|0?[1-9]):[0-5][0-9] [AP]M$'
+
+        # Server-side validation of the time slot format
+        if not re.match(pattern, time_duration):
+            flash('Invalid time slot format. Please use the "11:00 AM - 12:00 PM" format.', 'error')
+            return render_template('create_class.html')
+
         # Check if the class already exists to prevent duplicates
         existing_class = Class.query.filter_by(class_name=class_name, day=day, time_duration=time_duration).first()
 
@@ -258,6 +267,14 @@ def update_class(class_id):
         class_name = request.form.get('class_name')
         day = request.form.get('day')
         time_duration = request.form.get('time_duration')
+
+        # Regex pattern for matching "11:00 AM - 12:00 PM" format
+        pattern = r'^(?:1[0-2]|0?[1-9]):[0-5][0-9] [AP]M - (?:1[0-2]|0?[1-9]):[0-5][0-9] [AP]M$'
+
+        # Server-side validation of the time slot format
+        if not re.match(pattern, time_duration):
+            flash('Invalid time slot format. Please use the "11:00 AM - 12:00 PM" format.', 'error')
+            return render_template('create_class.html')
 
         # Check if the class already exists to prevent duplicates
         existing_class = Class.query.filter_by(class_name=class_name, day=day, time_duration=time_duration).first()
