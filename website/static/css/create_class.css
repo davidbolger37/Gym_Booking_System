@@ -81,6 +81,10 @@ input[type=submit]:hover {
 }
 
 
+select option{
+  background-color:black;
+}
+
 /*flash messages*/
 
 .alert {

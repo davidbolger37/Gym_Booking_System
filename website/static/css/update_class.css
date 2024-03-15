@@ -58,7 +58,7 @@ form label{
   border: 3px solid yellow;
   border-radius: 4px;
   box-sizing: border-box;
-  background: rgba(0, 0, 0, 1);
+  background: rgba(255, 255, 255, .101960784);
   color:white;
 }
 
@@ -80,6 +80,9 @@ input[type=submit]:hover {
    color: yellow;
 }
 
+select option{
+  background-color:black;
+}
 
 /*flash messages*/
 
