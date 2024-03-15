@@ -50,8 +50,10 @@ body {
 }
 
 #div1 {
+    opacity: 1;
     color: white;
     text-align: center;
-    width: 100%;
-    height: 100%;
+    height: 50%;
+    width: 80%; /* Adjust the width as desired */
+    margin: 0 auto; /* Center the div horizontally */
 }
