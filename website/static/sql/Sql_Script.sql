@@ -39,8 +39,15 @@ INSERT INTO users (first_name, last_name, user_email, user_password, role) VALUE
 -- Populate the 'class' table
 INSERT INTO class (class_name, day, time_duration) VALUES
 ('Yoga', 'Monday', '10:00 AM - 11:00 AM'),
-('Zumba', 'Wednesday', '6:00 PM - 7:00 PM'),
-('Pilates', 'Friday', '9:00 AM - 10:00 AM');
+('Zumba', 'Tuesday', '6:00 PM - 7:00 PM'),
+('Pilates', 'Wednesday', '9:00 AM - 10:00 AM'),
+('Yoga', 'Thursday', '10:00 AM - 11:00 AM'),
+('Zumba', 'Friday', '6:00 PM - 7:00 PM'),
+('Pilates', 'Saturday', '9:00 AM - 10:00 AM'),
+('Yoga', 'Thursday', '10:00 AM - 11:00 AM'),
+('Zumba', 'Friday', '6:00 PM - 7:00 PM'),
+('Pilates', 'Saturday', '9:00 AM - 10:00 AM'),
+('Zumba', 'Monday', '12:00 AM - 15:00 AM');
 
 -- Populate the 'booking' table
 INSERT INTO booking (user_id, class_id, user_email, class_name, day, time_duration, booking_at) VALUES

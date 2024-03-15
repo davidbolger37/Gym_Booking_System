@@ -356,5 +356,33 @@ def book_class(class_id):
     return redirect(url_for('booking'))
 
 
+@app.route('/delete-book/<int:class_id>', methods=['POST'])
+def delete_book(class_id):
+    if 'user_id' not in session:
+        flash('You need to log in to book a class.', 'error')
+        return redirect(url_for('login'))
+
+    # Retrieve the logged-in user
+    user = User.query.get(session['user_id'])
+
+    # Check if the class exists
+    class_to_book = Class.query.get(class_id)
+    if not class_to_book:
+        flash('Class not found.', 'error')
+        return redirect(url_for('booking'))
+
+    # Check if the user is already booked for this class
+    existing_booking = Booking.query.filter_by(user_id=user.id, class_id=class_id).first()
+    if existing_booking:
+        db.session.delete(existing_booking)
+        db.session.commit()
+        flash('Booking successfully cancelled!', 'info')
+        return redirect(url_for('booking'))
+    else:
+        db.session.rollback()
+        flash('Booking not found for the logged-in user and class.', 'error')
+        return redirect(url_for('booking'))
+
+
 if __name__ == '__main__':
     app.run(debug=True)
