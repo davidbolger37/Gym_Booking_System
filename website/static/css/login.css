@@ -9,7 +9,7 @@ LIGHT YELLOW: #FED053
 
 /* Headers styling */
 h1 {
-    background-color: #1E2328;
+    background-color: black;
     color: white;
     margin: 0px;
     padding: 16px;
@@ -17,7 +17,7 @@ h1 {
 }
 
 h3 {
-    background-color: #1E2328;
+    background-color: black;
     color: white;
     margin: 16px;
     padding: 16px;
@@ -25,7 +25,7 @@ h3 {
 }
 
 h4 {
-    background-color: #1E2328;
+    background-color: black;
     color: white;
     margin: 8px;
     padding: 8px;
@@ -116,7 +116,7 @@ body {
     bottom: 60px;
     width: 100%;
     padding: 10px;
-    background-color: #1E2328;
+    background-color: black;
     color: white;
     text-align: center;
 }

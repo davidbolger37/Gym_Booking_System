@@ -5,6 +5,8 @@
     <title>Book to GETFIT!</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" type="text/css" href="../static/css/booking.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/login.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
     <script>
     </script>
@@ -192,14 +194,14 @@
          }
     </style>
 </head>
-<body style="background-color: #1F2626;">
+<body style="background-image: url(../static/images/background/bookingBack.jpg); background-repeat: no-repeat; background-size: cover; height: 100vh;">
 <div class="main-wrapper">
     <section>
         <div>
             <div>
                 <div>
                     <div>
-                        <h1 style="text-align: center; color: white;">Bookings </h1>
+                        <h1 style="font-family:Audiowide, sans-serif;"><span style="color:yellow">GET</span>Fit - Booking</h1>
                     </div>
                     <!-- Flash Messages Section -->
                     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -211,16 +213,11 @@
                     </div>
                     {% endif %}
                     {% endwith %}
+                    <br><br><br><br>
                     <div id="div1"
-                         style="opacity: 1; color: white;background-image: url(../static/images/background/bookingBack.jpg); height: 100%; width: 100%;">
-                        <br><br><br>
-                        <h2>Below is a Schedule for each day in the Gym</h2>
-                        <p>Click a day to see its schedule or scroll to find something that suits
-                            you</p>
-                        <p>Click the Book button to book a timeslot or class</p>
-                        <br><br><br><br><br>
-                    </div>
-                    <div>
+                         style="opacity: 1; color: white;background-color: black; height: 100%; width: 50%; margin: 0 auto;">
+                        <br><br>
+                        <h2 style="font-family:Audiowide, sans-serif;">Class Bookings are now availabe for the days below</h2>
                         <div class="w3-container" id="container">
                             <button id="showMonday" style="background-color: #1F2626; color: #FFBF00"><a href="#monday">Monday</a>
                             </button>
@@ -245,10 +242,13 @@
                             {% endif %}
                         </div>
 
+                        <br>
+                    </div>
+                    <div>
                         <div style="margin-top: 4%; ">
                             {% for day, classes in classes_by_day.items() %}
                             <div id="{{ day.lower() }}">
-                                <h2 style="color: white; text-align: center; text-transform: uppercase;">{{ day }}</h2>
+                                <h2 style="color: white; text-align: center; text-transform: uppercase; font-family:Audiowide, sans-serif;">{{ day }}</h2>
                                 <div class="w3-container" style="width: 60%; margin: 0 auto; ">
                                     {% for class in classes %}
                                     <div class="w3-panel w3-card w3-amber"
@@ -367,6 +367,50 @@
             </div>
         </div>
     </section>
+</div>
+<br><br><br><br><br><br><br><br>
+<div class="w3-row info">
+    <div class="w3-container w3-third">
+        <h4 style="font-family:Audiowide, sans-serif;"><b style="color:yellow;">GET</b>FIT</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+
+        <div class="social-links">
+            <a href="https://www.facebook.com"><i class="fab fa-facebook-f"><img class="icon" src="../static/images/icons/facebook.png" alt="Facebook"></i></a>
+            <a href="https://www.twitter.com"><i class="fab fa-twitter"><img class="icon" src="../static/images/icons/twitter.png" alt="Twitter"></i></a>
+            <a href="https://www.instagram.com"><i class="fab fa-instagram"><img class="icon" src="../static/images/icons/instagram.png" alt="Instagram"></i></a>
+        </div>
+    </div>
+
+    <div class="w3-container w3-third">
+        <h4 style="color: yellow">Opening Hours</h4>
+        <div class="w3-center">
+            <div class="opening-hours">
+                <span class="weekdays">
+                    <p>Monday-Friday</p>
+                    <p>Saturday</p>
+                    <p>Sunday</p>
+                    <p>Bank Holidays</p>
+                </span>
+                <span class="times">
+                    <p>9:00 AM - 10:00 PM</p>
+                    <p>09:00 AM - 6:00 PM</p>
+                    <p>CLOSED</p>
+                    <p>11:00 AM - 07:00 PM</p>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="w3-container w3-third">
+        <h4 style="color: yellow">Contact Us</h4>
+        <div class="social-links">
+            <p><a><img class="icon fab" src="../static/images/icons/phone.png" alt="Phone"></a> +123456789</p>
+            <p><a><img class="icon fab" src="../static/images/icons/email.png" alt="Email"></a> gymapp@gymapp.com</p>
+            <p><a><img class="icon fab" src="../static/images/icons/location2.png" alt="Location"></a> 123 Street, City</p>
+        </div>
+    </div>
+    <p style="text-align: center; ">© 2024 INFUSE PROJECT. All rights reserved.</p>
 </div>
 <script>
 
