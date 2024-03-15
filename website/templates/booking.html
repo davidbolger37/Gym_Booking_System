@@ -69,7 +69,7 @@
         }
 
         /* Float cancel and delete buttons and add an equal width */
-        .cancelbtn, .deletebtn {
+        .cancelbtn, .deletebtn, .bookbtn, .cancel_bookbtn {
         float: left;
         width: 47%;
         font-family:Audiowide, sans-serif;
@@ -96,6 +96,30 @@
         }
 
         .deletebtn:hover {
+        background-color: red;
+        color: black;
+        }
+
+        /* Add a color to the book button */
+        .bookbtn {
+        background-color:black;
+        border: 1px solid yellow;
+        color:yellow;
+        }
+
+        .bookbtn:hover {
+        background-color: red;
+        color: black;
+        }
+
+        /* Add a color to the cancel button */
+        .cancel_bookbtn {
+        background-color:black;
+        border: 1px solid yellow;
+        color:yellow;
+        }
+
+        .cancel_bookbtn:hover {
         background-color: red;
         color: black;
         }
@@ -160,9 +184,9 @@
         display: table;
         }
 
-        /* Change styles for cancel button and delete button on extra small screens */
+        /* Change styles for cancel button and delete button on tiny screens */
         @media screen and (max-width: 300px) {
-        .cancelbtn, .deletebtn {
+        .cancelbtn, .deletebtn, .bookbtn, .cancel_bookbtn{
          width: 100%;
          }
          }
@@ -233,23 +257,72 @@
                                         <b>{{ class.class_name }}</b>-
 
                                         <div class="buttons" style="display:flex;">
-                                            <form action="{{ url_for('book_class', class_id=class.id) }}"
-                                                  method="post"
-                                                  onsubmit="return confirm('Are you sure you want to book this class?');">
-                                                <button type="submit"
-                                                        style="background-color: #1F2626; border: 2px solid white; color: white;margin:5px;">
-                                                    Book
-                                                </button>
-                                            </form>
 
-                                            <form action="{{ url_for('delete_book', class_id=class.id) }}"
-                                                  method="post"
-                                                  onsubmit="return confirm('Are you sure you want to book this class?');">
-                                                <button type="submit"
-                                                        style="background-color: #1F2626; border: 2px solid white; color: white;margin:5px;">
-                                                    Cancel
-                                                </button>
-                                            </form>
+<!--                                            <form action="{{ url_for('book_class', class_id=class.id) }}"-->
+<!--                                                  method="post"-->
+<!--                                                  onsubmit="return confirm('Are you sure you want to book this class?');">-->
+<!--                                                <button type="submit"-->
+<!--                                                        style="background-color: #1F2626; border: 2px solid white; color: white;margin:5px;">-->
+<!--                                                    Book-->
+<!--                                                </button>-->
+<!--                                            </form>-->
+
+                                            <button onclick="document.getElementById('id03-{{ class.id }}').style.display='block'"
+                                                    style="background-color: #1F2626; border: 2px solid white; color: white;margin:5px;">
+                                                Book
+                                            </button>
+                                            <div id="id03-{{ class.id }}" class="modal">
+                                                <span onclick="document.getElementById('id03-{{ class.id }}').style.display='none'"
+                                                      class="close" title="Close Modal">&times;</span>
+                                                <form class="modal-content"
+                                                      action="{{ url_for('book_class', class_id=class.id) }}"
+                                                      method="post">
+                                                    <div class="container">
+                                                        <h1 style="font-family:Audiowide, sans-serif;font-size:35px;">BOOKING</h1>
+                                                        <p>Are you sure you want to book this class?</p>
+
+                                                        <div class="clearfix">
+                                                            <button onclick="document.getElementById('id03-{{ class.id }}').style.display='none'"
+                                                                    type="button" class="cancelbtn">Cancel
+                                                            </button>
+                                                            <button type="submit" class="bookbtn">Book</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+<!--                                            <form action="{{ url_for('delete_book', class_id=class.id) }}"-->
+<!--                                                  method="post"-->
+<!--                                                  onsubmit="return confirm('Are you sure you want to book this class?');">-->
+<!--                                                <button type="submit"-->
+<!--                                                        style="background-color: #1F2626; border: 2px solid white; color: white;margin:5px;">-->
+<!--                                                    Cancel-->
+<!--                                                </button>-->
+<!--                                            </form>-->
+
+                                            <button onclick="document.getElementById('id02-{{ class.id }}').style.display='block'"
+                                                    style="background-color: #1F2626; border: 2px solid white; color: white;margin:5px;">
+                                                Cancel
+                                            </button>
+                                            <div id="id02-{{ class.id }}" class="modal">
+                                                <span onclick="document.getElementById('id02-{{ class.id }}').style.display='none'"
+                                                      class="close" title="Close Modal">&times;</span>
+                                                <form class="modal-content"
+                                                      action="{{ url_for('delete_book', class_id=class.id) }}"
+                                                      method="post">
+                                                    <div class="container">
+                                                        <h1 style="font-family:Audiowide, sans-serif;font-size:35px;">CANCEL BOOKING</h1>
+                                                        <p>Are you sure you want to cancel this booking?</p>
+
+                                                        <div class="clearfix">
+                                                            <button onclick="document.getElementById('id02-{{ class.id }}').style.display='none'"
+                                                                    type="button" class="cancelbtn">BACK
+                                                            </button>
+                                                            <button type="submit" class="cancel_bookbtn">CANCEL</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
 
                                             {% if user_role == 'admin' %}
                                             <button onclick="window.location.href='{{ url_for('update_class', class_id=class.id) }}'"
@@ -308,8 +381,10 @@
 
     // Get the modal
     var modal = document.getElementById('id01');
+    var modal = document.getElementById('id02');
+    var modal = document.getElementById('id03');
 
-   // When the user clicks anywhere outside of the modal, close it
+   // When the user clicks anywhere outside the modal, close it
    window.onclick = function(event) {
    if (event.target == modal) {
     modal.style.display = "none";
