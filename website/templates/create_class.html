@@ -21,7 +21,11 @@
                     </div>
                     {% endif %}
                     {% endwith %}
-<body>
+<body style=" font-family: Audiowide, sans-serif;
+    background-image:url({{url_for('static', filename = '/images/background/background_gif.gif') }});
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;">
 <form method="post">
     <label for="class_name">Class Name:</label>
     <input type="text" id="class_name" name="class_name" placeholder="Enter class name.."><br>
