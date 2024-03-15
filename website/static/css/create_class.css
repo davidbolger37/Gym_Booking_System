@@ -88,7 +88,7 @@ select option{
 /*flash messages*/
 
 .alert {
-    position: relative;
+    position: fixed;
     left:50%;
     transform: translateX(-50%);
     z-index: 1000; /* Make sure it's above other elements */
