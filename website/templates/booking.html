@@ -219,12 +219,14 @@
                             <h2 style="color: white; text-align: center; text-transform: uppercase; font-family:Audiowide, sans-serif;">Bookings - <b>{{ user.first_name }} </b> </h2>
                            {% for booking in bookings %}
                               {% if user_id == booking.user_id %}
+                                <div class="w3-container" style="width: 80%; margin: 0 auto; ">
                                     <div class="w3-panel w3-card "
                                          style="display:flex; justify-content:space-between; align-items:center; background-color:yellow;height:60px;">
                                         <b>{{ booking.class_name}}</b>
                                         <b>{{ booking.day}}</b>
                                         <b>{{ booking.time_duration}}</b>
                                     </div>
+                                </div>
                             {% endif %}
                             {% endfor %}
                         </div>
