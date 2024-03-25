@@ -182,6 +182,7 @@ def booking():
     if 'user_id' in session:
         user = User.query.get(session['user_id'])
         user_role = user.role
+        user_id = user.id
 
     # Define an ordering for the days of the week
     day_ordering = case(
@@ -205,7 +206,11 @@ def booking():
             classes_by_day[class_.day] = []
         classes_by_day[class_.day].append(class_)
 
-    return render_template('booking.html', user_role=user_role, classes_by_day=classes_by_day)
+    # Fetch all bookings
+    bookings = Booking.query.all()
+
+    return render_template('booking.html',user_id=user_id, user_role=user_role, classes_by_day=classes_by_day,
+                           bookings=bookings)
 
 
 @app.route('/create-class', methods=['GET', 'POST'])

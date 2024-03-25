@@ -218,6 +218,23 @@
                             </div>
                             {% endfor %}
                         </div>
+                        {% if user_role == 'user'%}
+                        <div style="border:2px solid yellow;background:rgba(0,0,0,.6);margin: 2% 10% 2% 10%;padding:10px;">
+                           {% for booking in bookings %}
+                              {% if user_id == booking.user_id %}
+                                    <div class="w3-panel w3-card "
+                                         style="display:flex; justify-content:space-between; align-items:center; background-color:yellow;height:60px;">
+                                        <b>{{ booking.user.first_name}}</b>
+                                        <b>{{ booking.class_name}}</b>
+                                    </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                          {% else %}
+                                <div class="w3-panel w3-card "
+                                         style="display:flex; justify-content:space-between; align-items:center; background-color:yellow;height:60px;">
+                                    </div>
+                         {% endif %}
                     </div>
                 </div>
             </div>
