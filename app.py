@@ -179,10 +179,14 @@ def logout():
 @app.route('/booking')
 def booking():
     user_role = None
+    user_id = None
+    user = None
+
     if 'user_id' in session:
         user = User.query.get(session['user_id'])
-        user_role = user.role
-        user_id = user.id
+        if user:
+            user_role = user.role
+            user_id = user.id
 
     # Define an ordering for the days of the week
     day_ordering = case(
@@ -194,7 +198,7 @@ def booking():
             'Thursday': 4,
             'Friday': 5,
             'Saturday': 6,
-        },
+        }
     )
 
     # Fetch all classes and order them first by day, then by time_duration
@@ -209,7 +213,7 @@ def booking():
     # Fetch all bookings
     bookings = Booking.query.all()
 
-    return render_template('booking.html',user_id=user_id, user_role=user_role, classes_by_day=classes_by_day,
+    return render_template('booking.html', user=user, user_id=user_id, user_role=user_role, classes_by_day=classes_by_day,
                            bookings=bookings)
 
 

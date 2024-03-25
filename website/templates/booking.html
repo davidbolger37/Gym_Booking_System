@@ -81,20 +81,23 @@
                     <div id="div1"
                          style="opacity: 1; color: white; height: 100%; width: 80%;margin: 0 auto;">
                         <br><br>
-                        <h2 style="font-family:Audiowide, sans-serif;color:white;padding:20px">Class Bookings are now availabe for the days below!</h2>
+                        <h2 style="font-family:Audiowide, sans-serif;color:white;padding:20px">Class Bookings are now available for the days below!</h2>
                         <div id="container">
-                            <button id="showMonday"><a href="#monday" style="text-decoration:none;">MONDAY</a>
-                            </button>
+                            <button id="showMonday"><a
+                                    href="#monday" style="text-decoration:none;">MONDAY</a></button>
                             <button id="showTuesday"><a
                                     href="#tuesday" style="text-decoration:none;">TUESDAY</a></button>
                             <button id="showWednesday"><a
                                     href="#wednesday" style="text-decoration:none;">WEDNESDAY</a></button>
                             <button id="showThursday"><a
                                     href="#thursday" style="text-decoration:none;">THURSDAY</a></button>
-                            <button id="showFriday"><a href="#friday" style="text-decoration:none;">FRIDAY</a>
-                            </button>
+                            <button id="showFriday"><a
+                                    href="#friday" style="text-decoration:none;">FRIDAY</a></button>
                             <button id="showSaturday"><a
                                     href="#saturday" style="text-decoration:none;">SATURDAY</a></button>
+                            <button id="showBookings"><a
+                                    href="#bookings" style="text-decoration:none;">BOOKINGS</a></button>
+
                         </div><br>
                         <div class="center">
                             {% if user_role == 'admin' %}
@@ -123,6 +126,7 @@
                                             <button class="card_button" onclick="document.getElementById('id03-{{ class.id }}').style.display='block'">
                                                 Book
                                             </button>
+
                                             <div id="id03-{{ class.id }}" class="modal">
                                                 <span onclick="document.getElementById('id03-{{ class.id }}').style.display='none'"
                                                       class="close" title="Close Modal">&times;</span>
@@ -142,15 +146,6 @@
                                                     </div>
                                                 </form>
                                             </div>
-
-<!--                                            <form action="{{ url_for('delete_book', class_id=class.id) }}"-->
-<!--                                                  method="post"-->
-<!--                                                  onsubmit="return confirm('Are you sure you want to book this class?');">-->
-<!--                                                <button type="submit"-->
-<!--                                                        style="background-color: #1F2626; border: 2px solid white; color: white;margin:5px;">-->
-<!--                                                    Cancel-->
-<!--                                                </button>-->
-<!--                                            </form>-->
 
                                             <button class="card_button" onclick="document.getElementById('id02-{{ class.id }}').style.display='block'">
                                                 Cancel
@@ -218,23 +213,23 @@
                             </div>
                             {% endfor %}
                         </div>
+                        <div id="bookings">
                         {% if user_role == 'user'%}
                         <div style="border:2px solid yellow;background:rgba(0,0,0,.6);margin: 2% 10% 2% 10%;padding:10px;">
+                            <h2 style="color: white; text-align: center; text-transform: uppercase; font-family:Audiowide, sans-serif;">Bookings - <b>{{ user.first_name }} </b> </h2>
                            {% for booking in bookings %}
                               {% if user_id == booking.user_id %}
                                     <div class="w3-panel w3-card "
                                          style="display:flex; justify-content:space-between; align-items:center; background-color:yellow;height:60px;">
-                                        <b>{{ booking.user.first_name}}</b>
                                         <b>{{ booking.class_name}}</b>
+                                        <b>{{ booking.day}}</b>
+                                        <b>{{ booking.time_duration}}</b>
                                     </div>
                             {% endif %}
                             {% endfor %}
                         </div>
-                          {% else %}
-                                <div class="w3-panel w3-card "
-                                         style="display:flex; justify-content:space-between; align-items:center; background-color:yellow;height:60px;">
-                                    </div>
                          {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
