@@ -1,11 +1,441 @@
+
 * {
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body {
-  font-family: "Lucida Console", monospace;
-  color: #1F2626;
+/* Navigation Bar */
+.navbar {
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    font-family: "Audiowide", sans-serif;
 }
+
+.navbar-brand {
+    font-size: 24px;
+    padding-right: 150px;
+}
+
+.navbar-nav {
+    list-style-type: none;
+    display: flex;
+}
+
+.nav-item {
+    padding: 20px;
+}
+
+.nav-item a {
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size:16px;
+}
+
+.nav-item a.active {
+    color: yellow;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.nav-item a:hover,
+.nav-item a:focus {
+    text-decoration: none;
+    color:yellow
+}
+
+.contact {
+    border: 2px solid white;
+    padding: 5px 10px;
+}
+.nav-item{
+    .contact:hover {
+      border: 2px solid  yellow;
+        background-color:  yellow;
+        color: black;
+    }
+}
+
+/*flash messages*/
+
+.alert {
+    position: relative;
+    left:50%;
+    transform: translateX(-50%);
+    z-index: 1000; /* Make sure it's above other elements */
+    background-color:black;
+    color:yellow;
+    text-align:center;
+    width:100%;
+    padding:10px;
+    font-size:20px;
+}
+
+/* Keyframes for the fade-out effect */
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Initially the message is fully visible */
+#flash-message {
+    animation-name: stayVisible;
+    animation-duration: 4s; /* Adjust the time for how long it stays */
+}
+
+/* After 4s, fade out the message in 1s */
+#flash-message.fade-out {
+    animation-name: fadeOut;
+    animation-duration: 1s;
+    animation-fill-mode: forwards; /* Keeps the element in the state of the last keyframe */
+    animation-delay: 3s; /* Adjust the delay to match how long the message stays */
+}
+
+/* To keep the message visible before it fades out */
+@keyframes stayVisible {
+    from { opacity: 1; }
+    to { opacity: 1; }
+}
+
+
+/*sidebar*/
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  z-index: 11;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: yellow;
+}
+
+.sidebar a.active{
+  color: yellow;
+}
+
+.sidebar .sidebarText{
+  font-size: 15px;
+   font-weight: 400;
+   line-height: 24px;
+   color: #fff;
+   padding: 8px 8px 8px 32px;
+}
+
+.sidebar .sidebarText:hover{
+color: yellow;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 30px;
+  cursor: pointer;
+  background-color: yellow;
+  color: black;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color:#EEDC5B ;
+  color: black;
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index:10;
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 102px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+
+/* For Mobile Screens */
+@media screen and (max-width: 768px) {
+    .navbar-brand, .navbar-nav {
+        display: none;
+    }
+    .openbtn {
+        display: block;
+    }
+}
+
+/* For Desktop Screens */
+@media screen and (min-width: 769px) {
+    .navbar-nav {
+        display: flex;
+    }
+
+}
+
+/*Footer Section*/
+
+
+ .footer .container{
+	max-width: 1170px;
+	margin:auto;
+}
+.footer .row{
+	display: flex;
+	flex-wrap: wrap;
+}
+.footer ul{
+	list-style: none;
+}
+.footer{
+	background-color: black;
+    padding: 70px 0;
+}
+.footer-col{
+   width: 25%;
+   padding: 0 15px;
+}
+.footer-col h4{
+	font-size: 18px;
+	color: yellow;
+	text-transform: capitalize;
+	margin-bottom: 35px;
+	font-weight: 500;
+	position: relative;
+}
+.footer-col h4::before{
+	content: '';
+	position: absolute;
+	left:0;
+	bottom: -10px;
+	background-color: white;
+	height: 2px;
+	box-sizing: border-box;
+	width: 50px;
+}
+.footer-col ul li:not(:last-child){
+	margin-bottom: 10px;
+}
+.footer-col ul li a{
+	font-size: 16px;
+	font-family:Arial;
+	text-transform: capitalize;
+	color: white;
+	text-decoration: none;
+	font-weight: 300;
+	color: #bbbbbb;
+	display: block;
+	transition: all 0.3s ease;
+}
+.footer-col ul li a:hover{
+	color: yellow;
+	padding-left: 8px;
+}
+.footer-col .social-links a{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	background-color: rgba(255,255,255,0.2);
+	margin:0 10px 10px 0;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 50%;
+	color: white;
+	transition: all 0.5s ease;
+}
+.footer-col .social-links a:hover{
+	color: black;
+	background-color: yellow;
+}
+
+
+        .center {
+            display: flex;
+            justify-content: center; /* Horizontal centering */
+            align-items: center; /* Vertical centering */
+            margin-top: 20px; /* Adjust as needed */
+        }
+
+        .create-class-button button {
+               background-color:black;
+            border:2px solid yellow;
+            color: yellow;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .create-class-button button:hover {
+         background-color:yellow;
+            color: black;
+            border:2px solid yellow;
+        }
+
+        /* Float cancel and delete buttons and add an equal width */
+        .cancelbtn, .deletebtn, .bookbtn, .cancel_bookbtn {
+        float: left;
+        width: 47%;
+        font-family:Audiowide, sans-serif;
+        margin:5px;
+        padding:5px;
+        }
+        /* Add a color to the cancel button */
+        .cancelbtn {
+        background-color:black;
+        border: 1px solid yellow;
+        color:yellow;
+        }
+
+        .cancelbtn:hover {
+        background-color: yellow;
+        color: black;
+        }
+
+        /* Add a color to the delete button */
+        .deletebtn {
+        background-color:black;
+        border: 1px solid yellow;
+        color:yellow;
+        }
+
+        .deletebtn:hover {
+        background-color: red;
+        color: black;
+        }
+
+        /* Add a color to the book button */
+        .bookbtn {
+        background-color:black;
+        border: 1px solid yellow;
+        color:yellow;
+        }
+
+        .bookbtn:hover {
+        background-color: red;
+        color: black;
+        }
+
+        /* Add a color to the cancel button */
+        .cancel_bookbtn {
+        background-color:black;
+        border: 1px solid yellow;
+        color:yellow;
+        }
+
+        .cancel_bookbtn:hover {
+        background-color: red;
+        color: black;
+        }
+
+        /* Add padding and center-align text to the container */
+        .modal_container {
+        padding: 16px;
+        text-align: center;
+        color: white;
+        }
+
+        /* The Modal (background) */
+        .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        padding-top: 50px;
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+        margin: 5% auto 15% auto;
+        border: 5px solid yellow;
+        width: 50%;
+        height: 50%;
+        background-color: rgba(0, 0, 0, 0.9);
+        border-radius: 5px;
+        padding: 40px;
+        color: white;
+        text-align:center;
+        }
+
+        .clearfix{
+        margin-top:20px;
+        }
+
+        /* Style the horizontal ruler */
+        hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+        }
+
+        /* The Modal Close Button (x) */
+        .close {
+        position: absolute;
+        right: 35px;
+        top: 15px;
+        font-size: 40px;
+        font-weight: bold;
+        color: #f1f1f1;
+        }
+
+        .close:hover,
+        .close:focus {
+        color: #f44336;
+        cursor: pointer;
+        }
+
+        /* Clear floats */
+        .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+        }
+
+        /* Change styles for cancel button and delete button on tiny screens */
+        @media screen and (max-width: 300px) {
+        .cancelbtn, .deletebtn, .bookbtn, .cancel_bookbtn{
+         width: 100%;
+         }
+         }
+
+
+
+
 
 /* Float four columns side by side */
 .column {
@@ -42,10 +472,51 @@ body {
   }
 }
 
+#container{
+    display: flex;
+    flex-direction: row; /* or row, depending on your layout */
+    justify-content:space-evenly;
+    align-items: center;
+}
+
+#container button{
+ background-color: black;
+            color: white;
+            border: 2px solid white;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration:none;
+              width: 135px;
+}
+
+
+#container button:hover{
+ background-color: yellow;
+            color: black;
+            border: 2px solid yellow;
+}
 
 #div1 {
+    opacity: 1;
     color: white;
     text-align: center;
-    width: 100%;
-    height: 100%;
+    height: 50%;
+    width: 80%; /* Adjust the width as desired */
+    margin: 0 auto; /* Center the div horizontally */
+}
+
+.card_button{
+background-color: black;
+          background-color:black;
+          color: white;
+          padding: 5px;
+          margin:5px;
+          cursor: pointer;
+          font-size: 16px;
+}
+
+.card_button:hover{
+          background-color: #1d1e20;
+          color:yellow;
 }
