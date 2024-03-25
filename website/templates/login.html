@@ -26,6 +26,49 @@
             height: 90vh;
             margin: 0;
         }
+
+        /*flash messages*/
+
+.alert {
+    position: relative;
+    left:50%;
+    transform: translateX(-50%);
+    z-index: 1000; /* Make sure it's above other elements */
+    background-color:black;
+    color:yellow;
+    text-align:center;
+    width:100%;
+    padding:10px;
+    font-size:20px;
+    margin-bottom:20px;
+}
+
+/* Keyframes for the fade-out effect */
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Initially the message is fully visible */
+#flash-message {
+    animation-name: stayVisible;
+    animation-duration: 4s; /* Adjust the time for how long it stays */
+}
+
+/* After 4s, fade out the message in 1s */
+#flash-message.fade-out {
+    animation-name: fadeOut;
+    animation-duration: 1s;
+    animation-fill-mode: forwards; /* Keeps the element in the state of the last keyframe */
+    animation-delay: 3s; /* Adjust the delay to match how long the message stays */
+}
+
+/* To keep the message visible before it fades out */
+@keyframes stayVisible {
+    from { opacity: 1; }
+    to { opacity: 1; }
+}
+
     </style>
 
     <script>
@@ -100,6 +143,18 @@
 
 <body class="background">
 
+<h1 style="font-family:Audiowide, sans-serif;"><span style="color:yellow">GET</span>Fit</h1>
+<!-- Flash Messages Section -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div id="flash-message" class="alert">
+    {% for category, message in messages %}
+    <div class="{{ category }}">{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
 <!--
 UNCOMMEND IF WE WANT TO INTRODUCE FLASH MESSAGES.
 PROBABLY USING ALERTS WOULD BE BETTER
@@ -164,6 +219,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 });
 </script>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const flashMessage = document.getElementById('flash-message');
+        if (flashMessage) {
+            setTimeout(() => {
+                flashMessage.classList.add('fade-out');
+            }, 4000); // 4000ms or 4 seconds until fade-out starts
+        }
+    });
+</script>
+
 </body>
 <!-- Footer Section -->
 
