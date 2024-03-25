@@ -41,22 +41,23 @@ INSERT INTO users (first_name, last_name, user_email, user_password, role) VALUE
 -- Populate the 'class' table
 INSERT INTO class (class_name, day, time_duration) VALUES
 ('Yoga', 'Monday', '10:00 AM - 11:00 AM'),
-('Zumba', 'Monday', '12:00 AM - 15:00 PM'),
-('Zumba', 'Tuesday', '18:00 PM - 19:00 PM'),
+('Swimming', 'Monday', '12:00 AM - 3:00 PM'),
+('Weightlifting', 'Tuesday', '3:00 PM - 5:00 PM'),
+('Zumba', 'Tuesday', '6:00 PM - 7:00 PM'),
 ('Pilates', 'Wednesday', '9:00 AM - 10:00 AM'),
-('Spinning', 'Wednesday', '13:00 PM - 14:00 PM'),
-('Yoga', 'Thursday', '10:00 AM - 11:00 AM'),
-('Pilates', 'Thursday', '10:00 AM - 11:00 AM'),
-('Spinning', 'Friday', '18:00 PM - 19:00 PM'),
-('Yoga', 'Friday', '20:00 PM - 22:00 PM'),
+('Running', 'Wednesday', '1:00 PM - 2:00 PM'),
+('Spinning', 'Thursday', '10:00 AM - 11:00 AM'),
+('Cardio', 'Thursday', '4:00 PM - 6:00 PM'),
+('Crossfit', 'Friday', '6:00 PM - 7:00 PM'),
+('Pilates', 'Friday', '8:00 PM - 10:00 PM'),
 ('Spinning', 'Saturday', '6:00 AM - 8:00 AM'),
-('Pilates', 'Saturday', '9:00 AM - 10:00 AM');
+('Cardio', 'Saturday', '9:00 AM - 10:00 AM');
 
 -- Populate the 'booking' table
 INSERT INTO booking (user_id, class_id, user_email, class_name, day, time_duration, booking_at) VALUES
 (2, 1, 'john@example.com', 'Yoga', 'Monday', '10:00 AM - 11:00 AM', NOW()),
-(5, 3, 'alice@example.com', 'Zumba', 'Tuesday', '18:00 PM - 19:00 PM', NOW()),
-(1, 4, 'jane@example.com', 'Pilates', 'Wednesday', '9:00 AM - 10:00 AM', NOW()),
-(5, 8, 'alice@example.com', 'Spinning', 'Friday', '18:00 PM - 19:00 PM', NOW()),
-(4, 9, 'devin@example.com', 'Yoga', 'Friday', '20:00 PM - 22:00 PM', NOW()),
-(3, 11, 'mason@example.com', 'Pilates', 'Saturday', '9:00 AM - 10:00 AM', NOW());
+(5, 3, 'alice@example.com', 'Weightlifting', 'Tuesday', '3:00 PM - 5:00 PM', NOW()),
+(3, 4, 'mason@example.com', 'Zumba', 'Wednesday', '9:00 AM - 10:00 AM', NOW()),
+(5, 7, 'alice@example.com', 'Spinning', 'Thursday', '10:00 AM - 11:00 AM', NOW()),
+(4, 9, 'devin@example.com', 'Crossfit', 'Friday', '6:00 PM - 7:00 PM', NOW()),
+(3, 12, 'mason@example.com', 'Cardio', 'Saturday', '9:00 AM - 10:00 AM', NOW());
