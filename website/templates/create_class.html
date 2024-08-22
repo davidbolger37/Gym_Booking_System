@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create New Class</title>
+     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/create_class.css') }}">
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
+     <link rel="stylesheet" type="text/css" href="../static/css/create_class.css">
+</head>
+<div class="topnav">
+    Create New Class
+  <a href="/booking" class="split">BACK</a>
+</div>
+ <!-- Flash Messages Section -->
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    <div id="flash-message" class="alert">
+                        {% for category, message in messages %}
+                        <div class="{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+<body style=" font-family: Audiowide, sans-serif;
+    background-image:url({{url_for('static', filename = '/images/background/background_gif.gif') }});
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;">
+<form id="create_form" method="post">
+    <label for="class_name">Class Name:</label>
+    <input type="text" id="class_name" name="class_name" placeholder="Enter class name.."><br>
+
+    <label for="time_duration">Time Slot:</label>
+    <input type="text" id="time_duration" name="time_duration" placeholder="Eg. 11:00 AM - 12:00 PM" required pattern="(?:1[0-2]|0?[1-9]):[0-5][0-9] [AP]M - (?:1[0-2]|0?[1-9]):[0-5][0-9] [AP]M">><br>
+
+    <label for="day">Day:</label>
+    <select id="day" name="day" required>
+        <option value="Monday">Monday</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+    </select><br>
+
+    <input type="submit" value="Create Class">
+</form>
+<script>
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const flashMessage = document.getElementById('flash-message');
+    if (flashMessage) {
+        setTimeout(() => {
+            flashMessage.classList.add('fade-out');
+        }, 4000); // 4000ms or 4 seconds until fade-out starts
+    }
+});
+    document.getElementById("create_form").addEventListener("submit", function(event) {
+    var timeDurationInput = document.getElementById("time_duration");
+    var timeDurationValue = timeDurationInput.value;
+    var regex = /^(?:1[0-2]|0?[1-9]):[0-5][0-9] [AP]M - (?:1[0-2]|0?[1-9]):[0-5][0-9] [AP]M$/;
+
+    if (!regex.test(timeDurationValue)) {
+        alert("Please enter the time slot in the format: '11:00 AM - 12:00 PM'");
+        event.preventDefault(); // Prevent form submission
+    }
+});
+</script>
+</body>
+</html>
