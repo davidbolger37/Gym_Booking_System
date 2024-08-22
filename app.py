@@ -2,7 +2,6 @@ from flask import Flask, request, flash, url_for, redirect, session, render_temp
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import Enum, case
-from datetime import datetime
 import re
 
 USERNAME = 'root'
@@ -188,18 +187,15 @@ def booking():
             user_role = user.role
             user_id = user.id
 
-    # Define an ordering for the days of the week
-    day_ordering = case(
-        value=Class.day,
-        whens={
-            'Monday': 1,
-            'Tuesday': 2,
-            'Wednesday': 3,
-            'Thursday': 4,
-            'Friday': 5,
-            'Saturday': 6,
-        }
-    )
+        # Define an ordering for the days of the week using positional arguments for "whens"
+        day_ordering = case(
+            (Class.day == 'Monday', 1),
+            (Class.day == 'Tuesday', 2),
+            (Class.day == 'Wednesday', 3),
+            (Class.day == 'Thursday', 4),
+            (Class.day == 'Friday', 5),
+            (Class.day == 'Saturday', 6),
+        )
 
     # Fetch all classes and order them first by day, then by time_duration
     classes = Class.query.order_by(day_ordering, Class.time_duration).all()
